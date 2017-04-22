@@ -1,9 +1,9 @@
 'use strict';
 
+import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
-var React = require('react-native');
 
-module.exports = StyleSheet.create({
+export const Style = StyleSheet.create({
     container: {
         backgroundColor: '#ffffff',
         flex: 1,

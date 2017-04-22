@@ -7,20 +7,16 @@ import {
     Image,
 } from 'react-native';
 
-import Style from './topicListCellSheet';
+import {Style} from './topicListCellSheet';
 export default class TopicListCell extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
     render() {
+        const data = this.props.data;
         return (
             <TouchableHighlight onPress={this.props.onSelect} underlayColor={'#eeeeee'}>
                 <View style={Style.container}>
                     <Image style={Style.avatar}
                     source={{
-                        uri: avatar
+                        uri: data.avatar
                     }} />
 
                     <View style={Style.topic}>
@@ -54,14 +50,14 @@ export default class TopicListCell extends Component {
         const data = this.props.data;
         if(data.last_touched){
             return (
-                        <Text style={Style.info}>
-                            <Text style={Style.node_name}>{data.node}</Text> • 
-                            <Text style={Style.user}>{data.username}</Text> • 
-                            <Text style={Style.time}>于{data.last_touched}发布</Text> •
-                            <Text>最后回复来自</Text>
-                            <Text style={Style.user}>{data.last_reply_username}</Text> 
-                        </Text>
-                        );
+                <Text style={Style.info}>
+                    <Text style={Style.node_name}>{data.node}</Text> • 
+                    <Text style={Style.user}>{data.username}</Text> • 
+                    <Text style={Style.time}>于{data.last_touched}发布</Text> •
+                    <Text>最后回复来自</Text>
+                    <Text style={Style.user}>{data.last_reply_username}</Text> 
+                </Text>
+                );
         }
         return (
             <Text style={Style.info}>
@@ -72,12 +68,3 @@ export default class TopicListCell extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-});
