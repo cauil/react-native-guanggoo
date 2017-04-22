@@ -26,9 +26,7 @@ export default class Lastest extends Component {
             return this.renderList();
         } else {
             return (
-                <View style={{height: 50}}>
-                    <ActivityIndicator  color="#356DD0" style={{marginVertical: 30,marginBottom: 30}} />
-                </View>
+                <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
             );
         }
     }
@@ -46,7 +44,6 @@ export default class Lastest extends Component {
                 loaded: true,
                 pageNum: num,
             })
-            console.log(this.state);
         });
     }
     renderList() {
@@ -54,7 +51,7 @@ export default class Lastest extends Component {
             <ListView
             style={Style.listView}
             ref="listview"
-            pageSize={36}
+            initialListSize={8}
             dataSource={this.state.dataSource}
             renderFooter={this.renderFooter.bind(this)}
             renderRow={this.renderTopicListCell.bind(this)}
@@ -65,9 +62,10 @@ export default class Lastest extends Component {
     }
     renderFooter() {
         if(this.state.loaded){
-            return <View style={{marginVertical: 30}} ><Text>...</Text></View>;
+            return <View style={{height: 50}} ><Text></Text></View>;
         }
-        return <ActivityIndicator color="#356DD0"  style={{marginVertical: 30,marginBottom: 30}} />;
+
+        return <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginBottom: 200}} size="large" />
     }
     renderTopicListCell(data) {
         return (
@@ -106,4 +104,9 @@ const Style = StyleSheet.create({
         marginTop: 65,
         marginBottom: 0
     },
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 8,
+    }
 });
