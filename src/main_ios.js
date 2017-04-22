@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TabBarIOS,
+  NavigatorIOS
 } from 'react-native';
+
+import Lastest from './components/lastest';
 
 export default class guanggoo extends Component {
     static title = '光谷社区';
@@ -31,7 +33,14 @@ export default class guanggoo extends Component {
                       selectedTab: 'lastest',
                     });
                   }}>
-                  <View><Text>lastest</Text></View>
+                    <NavigatorIOS style={Style.container}
+                        tintColor={'#333344'}
+                        initialRoute={{
+                          title: '最新主题',
+                          component: Lastest,
+                          passProps: {name: 'lastest', type: 'tab'}
+                        }}
+                        itemWrapperStyle={Style.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                   title="精华"
@@ -55,17 +64,31 @@ export default class guanggoo extends Component {
                   }}>
                   <View><Text>more</Text></View>
                 </TabBarIOS.Item>
+                <TabBarIOS.Item
+                  title="全部"
+                  systemIcon="bookmarks"
+                  selected={this.state.selectedTab === 'all'}
+                  onPress={() => {
+                    this.setState({
+                      selectedTab: 'all',
+                    });
+                  }}>
+                  <View><Text>more</Text></View>
+                </TabBarIOS.Item>
               </TabBarIOS>
         );
     }
 }
 
-const styles = StyleSheet.create({
+const Style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  navigator: {
+    backgroundColor: '#E7EAEC'
   },
   welcome: {
     fontSize: 20,
