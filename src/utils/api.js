@@ -13,9 +13,9 @@ const api = {
 */
 
 function getHtml({type, name, pageNum}) {
-    const url = `${api[type]}name${pageNum ? ('&p=' + pageNum) : ''}`
+    const url = `${api[type]}${name}${pageNum ? ('&p=' + pageNum) : ''}`
 
-      return fetch('http://www.guanggoo.com', {
+      return fetch(url, {
           headers: {
             'Accept': 'text/html,application/xhtml+xml,application/xml;',
             'Content-Type': 'application/x-www-form-urlencoded',

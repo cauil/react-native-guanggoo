@@ -1,6 +1,6 @@
 const cheerio = require('cheerio-without-node-native');
 
-function parseData(html) {
+function parseListData(html) {
     const result = [];
     const $ = cheerio.load(html);
     $('.topic-item').each((i, v) => {
@@ -23,6 +23,43 @@ function parseData(html) {
     return result;
 }
 
+function parseTopicData(html) {
+    let $ = cheerio.load(html);
+    const content = [];
+    const content_obj = $('.topic-detail .ui-content p');
+    for(let i = 0, len = content_obj.length; i < len; i++) {
+        const obj = content_obj.eq(i);
+        const text = obj.text();
+        const img = obj.find('img').attr('src');
+        const a = obj.find('a').text();
+        content.push({text, img, a});
+    }
+
+    const comment = [];
+    const comment_obj = $('.topic-reply .reply-item');
+    for(let i = 0, len = comment_obj.length; i < len; i++) {
+        const obj = comment_obj.eq(i);
+        const name = obj.find('.username').text();
+        const time = obj.find('.time').text();
+        const floor = obj.find('.floor').eq(0).text();
+        const votecount = obj.find('.J_replyVote').text();
+
+        const content = [];
+        const content_obj = obj.find('.content p');
+        for(let i = 0, len = content_obj.length; i < len; i++) {
+            const innerobj = content_obj.eq(i);
+            const text = innerobj.text();
+            const img = innerobj.find('img').attr('src');
+            //const usermention = innerobj.find('.user-mention').text();
+            const a = innerobj.find('a').text();
+            content.push({text, a, img});
+        }
+        comment.push({name, time, floor, votecount, content});
+    }
+    return {content, comment};
+}
+
 export {
-    parseData,
+    parseListData,
+    parseTopicData,
 }

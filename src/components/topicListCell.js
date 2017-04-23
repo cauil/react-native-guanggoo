@@ -48,7 +48,7 @@ export default class TopicListCell extends Component {
 
     renderInfo() {
         const data = this.props.data;
-        if(data.last_touched){
+        if(data.count){
             return (
                 <Text style={Style.info}>
                     <Text style={Style.node_name}>{data.node}</Text> • 

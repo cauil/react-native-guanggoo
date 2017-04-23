@@ -4,13 +4,13 @@ import {
   Text,
   View,
   ListView,
-  NavigatorIOS,
   ActivityIndicator,
 } from 'react-native';
 
-import TopicListCell from './topicListCell.js';
+import TopicListCell from './topicListCell';
+import TopicView from './topic';
 import {getHtml} from '../utils/api';
-import {parseData} from '../utils/data';
+import {parseListData} from '../utils/data';
 
 let List = [];
 export default class Lastest extends Component {
@@ -36,7 +36,7 @@ export default class Lastest extends Component {
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};
         getHtml(data).then( (result) => {
-            const arr = parseData(result);
+            const arr = parseListData(result);
             List = List.concat(arr);
             console.log(List);
             this.setState({
@@ -65,7 +65,7 @@ export default class Lastest extends Component {
             return <View style={{height: 50}} ><Text></Text></View>;
         }
 
-        return <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginBottom: 200}} size="large" />
+        return <ActivityIndicator animating={true}  color="#356DD0" style={{height: 80, marginBottom: 200}} size="large" />
     }
     renderTopicListCell(data) {
         return (
@@ -81,7 +81,8 @@ export default class Lastest extends Component {
             title: '详细' + (data.replies_count ? '（' + data.replies_count.toString() + '条回复）' : ''),
             component: TopicView,
             passProps: {
-                data: data
+                data: data,
+                type: 'topic',
             }
         });
     }
