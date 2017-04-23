@@ -31,11 +31,21 @@ export const Style = StyleSheet.create({
 		marginLeft: 5,
 		borderRadius: 4
 	},
+	content_img: {
+        flex: 1,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: 300,
+        height: 300,
+        resizeMode: 'contain',
+	},
 	contentWrapper: {
+        display: 'flex',
 		borderBottomWidth: 1,
 		borderColor: '#cccccc',
 	},
 	content: {
+        flex: 1,
 		fontSize: 14,
 		color: '#666666',
 		padding: 10,

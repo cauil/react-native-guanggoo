@@ -38,7 +38,6 @@ export default class Lastest extends Component {
         getHtml(data).then( (result) => {
             const arr = parseListData(result);
             List = List.concat(arr);
-            console.log(List);
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(List),
                 loaded: true,
@@ -78,7 +77,7 @@ export default class Lastest extends Component {
     }
     selectTopic(data) {
         this.props.navigator.push({
-            title: '详细' + (data.replies_count ? '（' + data.replies_count.toString() + '条回复）' : ''),
+            title: '详细' + (data.count ? '（' + data.count.toString() + '条回复）' : ''),
             component: TopicView,
             passProps: {
                 data: data,

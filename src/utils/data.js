@@ -39,6 +39,7 @@ function parseTopicData(html) {
     const comment_obj = $('.topic-reply .reply-item');
     for(let i = 0, len = comment_obj.length; i < len; i++) {
         const obj = comment_obj.eq(i);
+        const avatar = obj.find('.avatar').attr('src');
         const name = obj.find('.username').text();
         const time = obj.find('.time').text();
         const floor = obj.find('.floor').eq(0).text();
@@ -50,11 +51,10 @@ function parseTopicData(html) {
             const innerobj = content_obj.eq(i);
             const text = innerobj.text();
             const img = innerobj.find('img').attr('src');
-            //const usermention = innerobj.find('.user-mention').text();
             const a = innerobj.find('a').text();
             content.push({text, a, img});
         }
-        comment.push({name, time, floor, votecount, content});
+        comment.push({name, avatar, time, floor, votecount, content});
     }
     return {content, comment};
 }

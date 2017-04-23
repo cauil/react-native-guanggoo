@@ -21,8 +21,6 @@ export const Style = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 3,
     },
-
-
     title: {
         fontSize: 14,
         textAlign: 'left',

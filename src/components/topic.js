@@ -8,6 +8,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 
+import CommentCell from './commentCell';
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
 
@@ -79,34 +80,29 @@ export default class Topic extends Component {
             renderFooter={this.renderFooter.bind(this)}
             automaticallyAdjustContentInsets={false}
             showsVerticalScrollIndicator={false}
-            style={Style.TopicList} />
+            style={Style.TopicList}
+            enableEmptySections={true} />
         );
     }
     renderTopicContent() {
         return (
             <View style={Style.container}>
-                <View style={[Style.contentWrapper, {marginTop: -5}]}>
-                    <Text style={Style.content}>
-                        {this.state.content.map((i, v) => {
-                            return (
-                                <Text>
-                                    <Image source={{uri: v.img}} />
-                                    {v.text}
-                                    {v.a}
-                                </Text>
-                            )
-                        })}
-                    </Text>
-                </View>
+                {this.state.content.map((v, i) => {
+                    return this.renderTopicContentCell(v, i);
+                })}
             </View>
         );
     }
-    renderCommentList(data) {
+    renderTopicContentCell(v, i) {
         return (
-            <View>
-            <Text>test</Text>
-        </View>
-        );
+            <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
+                {v.img ? <Image style={Style.content_img} source={{uri: v.img}} /> : null}
+                {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
+                {v.a ? <Text style={Style.content}>{v.a}</Text> : null}
+            </View>
+        )
+    }
+    renderCommentList(data) {
         return (
             <CommentCell data={data} />
         );
