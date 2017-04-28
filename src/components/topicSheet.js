@@ -65,10 +65,4 @@ export const Style = StyleSheet.create({
         justifyContent: 'center',
         padding: 8,
     },
-    login_container: {
-        backgroundColor: '#eeeeee',
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
 });

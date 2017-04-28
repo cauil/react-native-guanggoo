@@ -12,17 +12,32 @@ import TopicView from './topic';
 import {getHtml} from '../utils/api';
 import {parseListData} from '../utils/data';
 
+import {needLoginNodes, needLoginView} from '../utils/const';
+
 let List = [];
 export default class Lastest extends Component {
-    state = {
-        dataSource: new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        }),
-        loaded: false,
-        pageNum: 0,
-        List: [],
-    };
+    constructor(props) {
+        super(props);
+        let needLogin = false;
+        if(props.type === 'node' && (needLoginNodes.indexOf(props.name) > -1) ) {
+            needLogin = true;
+        }
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2) => r1 !== r2
+            }),
+            loaded: false,
+            pageNum: 0,
+            List: [],
+            needLogin,
+        };
+    }
     render() {
+        if(this.state.needLogin) {
+            return (
+                <needLoginView />
+            )
+        }
         if(this.state.loaded && this.state.pageNum > 0) {
             return this.renderList();
         } else {
@@ -36,7 +51,6 @@ export default class Lastest extends Component {
     }
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};
-        console.log(data);
         getHtml(data).then( (result) => {
             const arr = parseListData(result);
             this.state.List = this.state.List.concat(arr);
@@ -48,6 +62,13 @@ export default class Lastest extends Component {
         });
     }
     renderList() {
+        if(this.state.needLogin) {
+            return (
+                <View style={Style.login_container}>
+                    <Text>请先登录社区再完成操作!</Text>
+                </View>
+            )
+        }
         return (
             <ListView
             style={Style.listView}
@@ -110,5 +131,5 @@ const Style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 8,
-    }
+    },
 });

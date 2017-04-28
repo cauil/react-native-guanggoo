@@ -13,8 +13,7 @@ const api = {
 */
 
 function getHtml({type, name, pageNum}) {
-    const url = `${api[type]}${name}${pageNum ? ('&p=' + pageNum) : ''}`
-    console.log(url);
+    const url = `${api[type]}${name}${pageNum ? ((type==='node' ? '?p=' : '&p=') + (pageNum)) : ''}`
 
       return fetch(url, {
           headers: {

@@ -10,6 +10,7 @@ function parseListData(html) {
         obj.title = $('.title a').text();
         obj.url = $('.title a').attr('href');
         obj.node = $('.node a').text();
+        obj.nodeType = $('.node a').attr('href').split('/')[2];
         obj.username = $('.username a').text();
         obj.last_touched = $('.last-touched').text();
         if($('.last-reply-username a strong').text()) {

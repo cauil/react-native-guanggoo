@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import TopicList from './components/topicList';
+import Nodes from './components/nodes';
 
 export default class guanggoo extends Component {
     static title = '光谷社区';
@@ -69,7 +70,14 @@ export default class guanggoo extends Component {
                       selectedTab: 'more',
                     });
                   }}>
-                  <View><Text>more</Text></View>
+                    <NavigatorIOS style={Style.container}
+                        tintColor={'#333344'}
+                        initialRoute={{
+                          title: '节点分类',
+                          component: Nodes,
+                          passProps: {},
+                        }}
+                        itemWrapperStyle={Style.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                   title="全部"

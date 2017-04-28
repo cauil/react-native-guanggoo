@@ -13,6 +13,7 @@ import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
 
 import {Style} from './topicSheet';
+import {needLoginNodes, needLoginView} from '../utils/const';
 
 export default class Topic extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class Topic extends Component {
         const reg = /^\/t\/(\d+)/i;
         const topicNum = props.data.url.match(reg)[1]
         let needLogin = false;
-        if(props.data.node === '找工作') {
+        if(needLoginNodes.indexOf(props.data.nodeType) > -1) {
             needLogin = true;
         }
         this.state = {
@@ -41,9 +42,7 @@ export default class Topic extends Component {
     render() {
         if(this.state.needLogin) {
             return (
-                <View style={Style.login_container}>
-                    <Text>请先登录社区再完成操作!</Text>
-                </View>
+                <needLoginView />
             )
         } else if(this.state.loaded) {
             return (
