@@ -14,6 +14,7 @@ const api = {
 
 function getHtml({type, name, pageNum}) {
     const url = `${api[type]}${name}${pageNum ? ('&p=' + pageNum) : ''}`
+    console.log(url);
 
       return fetch(url, {
           headers: {

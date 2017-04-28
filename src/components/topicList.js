@@ -20,6 +20,7 @@ export default class Lastest extends Component {
         }),
         loaded: false,
         pageNum: 0,
+        List: [],
     };
     render() {
         if(this.state.loaded && this.state.pageNum > 0) {
@@ -35,11 +36,12 @@ export default class Lastest extends Component {
     }
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};
+        console.log(data);
         getHtml(data).then( (result) => {
             const arr = parseListData(result);
-            List = List.concat(arr);
+            this.state.List = this.state.List.concat(arr);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(List),
+                dataSource: this.state.dataSource.cloneWithRows(this.state.List),
                 loaded: true,
                 pageNum: num,
             })

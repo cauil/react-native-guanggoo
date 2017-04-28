@@ -7,7 +7,7 @@ import {
   NavigatorIOS
 } from 'react-native';
 
-import Lastest from './components/lastest';
+import TopicList from './components/topicList';
 
 export default class guanggoo extends Component {
     static title = '光谷社区';
@@ -37,7 +37,7 @@ export default class guanggoo extends Component {
                         tintColor={'#333344'}
                         initialRoute={{
                           title: '最新主题',
-                          component: Lastest,
+                          component: TopicList,
                           passProps: {name: 'lastest', type: 'tab'}
                         }}
                         itemWrapperStyle={Style.navigator} />
@@ -51,7 +51,14 @@ export default class guanggoo extends Component {
                       selectedTab: 'featured',
                     });
                   }}>
-                  <View><Text>featured</Text></View>
+                    <NavigatorIOS style={Style.container}
+                        tintColor={'#333344'}
+                        initialRoute={{
+                          title: '精华主题',
+                          component: TopicList,
+                          passProps: {name: 'elite', type: 'tab'}
+                        }}
+                        itemWrapperStyle={Style.navigator} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                   title="节点"
