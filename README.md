@@ -6,11 +6,11 @@ React-Native IOS APP for www.guanggoo.com
 
 #### IOS
 
-- [] reflash
-- [] precise content and comment
-- [] icon
-- [] picture 
-- [] login
+- [ ] reflash
+- [ ] precise content and comment
+- [ ] icon
+- [ ] picture 
+- [ ] login
 
 #### Andrios
 
