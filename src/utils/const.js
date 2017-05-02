@@ -1,10 +1,3 @@
-import React, {Component} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-
 export const nodes_data = [
     {name: '生活百科', list: [
         {name: '楼市房产', type: 'house'},
@@ -77,21 +70,3 @@ export const needLoginNodes = [
     'job', 'date', '2ndhand', 'tastory'
 ]
 
-export class needLoginView extends Component {
-    render() {
-        return (
-            <View style={Style.login_container}>
-                <Text>本主题需要登录社区后才能展示!</Text>
-            </View>
-        )
-    }
-}
-
-const Style = StyleSheet.create({
-    login_container: {
-        backgroundColor: '#eeeeee',
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-});

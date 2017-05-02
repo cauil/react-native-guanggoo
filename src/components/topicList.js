@@ -9,10 +9,11 @@ import {
 
 import TopicListCell from './topicListCell';
 import TopicView from './topic';
+import NeedLoginView from './needLoginView.js';
+
 import {getHtml} from '../utils/api';
 import {parseListData} from '../utils/data';
-
-import {needLoginNodes, needLoginView} from '../utils/const';
+import {needLoginNodes} from '../utils/const';
 
 let List = [];
 export default class Lastest extends Component {
@@ -35,7 +36,7 @@ export default class Lastest extends Component {
     render() {
         if(this.state.needLogin) {
             return (
-                <needLoginView />
+                <NeedLoginView />
             )
         }
         if(this.state.loaded && this.state.pageNum > 0) {

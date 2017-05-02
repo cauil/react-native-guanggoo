@@ -76,18 +76,17 @@ export default class Nodes extends Component {
 
 const Style = StyleSheet.create({
     scollView: {
-        backgroundColor: '#eeeeee',
+        backgroundColor: 'white',
         marginTop: 1,
         marginBottom: 50,
     },
     container: {
-        backgroundColor: '#eeeeee',
+        backgroundColor: 'white',
         flex:1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 20,
         paddingBottom: 20,
-        //borderTopColor: '#00abe4',
         borderTopColor: '#98acdf',
         borderTopWidth: 1,
     },
@@ -110,10 +109,13 @@ const Style = StyleSheet.create({
         justifyContent: 'center',
         padding: 8,
         margin: 5,
+        borderRadius: 5,
+        borderColor: '#98acdf',
+        borderWidth: 1,
         width: PixelRatio.get() === 3 ? 124 : PixelRatio.getPixelSizeForLayoutSize(55),
     },
     node: {
-        fontSize: 14,
+        fontSize: 12,
         textAlign: 'left',
         color: '#666E74'
         //color: '#98acdf',

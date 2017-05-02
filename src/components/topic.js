@@ -8,12 +8,13 @@ import {
     ActivityIndicator
 } from 'react-native';
 
+import NeedLoginView from './needLoginView.js';
 import CommentCell from './commentCell';
+
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
-
 import {Style} from './topicSheet';
-import {needLoginNodes, needLoginView} from '../utils/const';
+import {needLoginNodes} from '../utils/const';
 
 export default class Topic extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ export default class Topic extends Component {
     render() {
         if(this.state.needLogin) {
             return (
-                <needLoginView />
+                <NeedLoginView />
             )
         } else if(this.state.loaded) {
             return (
