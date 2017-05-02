@@ -77,7 +77,7 @@ export default class Nodes extends Component {
 const Style = StyleSheet.create({
     scollView: {
         backgroundColor: '#eeeeee',
-        marginTop: 10,
+        marginTop: 1,
         marginBottom: 50,
     },
     container: {
@@ -87,14 +87,15 @@ const Style = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 20,
         paddingBottom: 20,
-        borderTopColor: '#00abe4',
+        //borderTopColor: '#00abe4',
+        borderTopColor: '#98acdf',
         borderTopWidth: 1,
     },
     nodeType: {
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'left',
-        color: '#666E74'
+        color: '#98acdf',
     },
     nodes: {
         width: '100%',
@@ -113,9 +114,9 @@ const Style = StyleSheet.create({
     },
     node: {
         fontSize: 14,
-        fontWeight: 'bold',
         textAlign: 'left',
         color: '#666E74'
+        //color: '#98acdf',
     },
 
 });

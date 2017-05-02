@@ -24,7 +24,7 @@ export const Style = StyleSheet.create({
     title: {
         fontSize: 14,
         textAlign: 'left',
-        color: '#356DD0'
+        color: '#356DD0',
     },
     topic: {
         flex: 1,

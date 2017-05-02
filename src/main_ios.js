@@ -21,10 +21,10 @@ export default class guanggoo extends Component {
     render() {
         return (
             <TabBarIOS
-                unselectedTintColor="yellow"
-                tintColor="white"
-                unselectedItemTintColor="red"
-                barTintColor="darkslateblue">
+                unselectedTintColor="#555"
+                tintColor="#98acdf"
+                unselectedItemTintColor="#555"
+                barTintColor="white">
                 <TabBarIOS.Item
                   title="最新"
                   systemIcon="most-recent"
@@ -98,9 +98,9 @@ export default class guanggoo extends Component {
 const Style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E7EAEC'
+    backgroundColor: '#E7EAEC',
   },
   navigator: {
-    backgroundColor: '#E7EAEC'
+    backgroundColor: '#E7EAEC',
   },
 });
