@@ -8,7 +8,7 @@ React-Native IOS APP for www.guanggoo.com
 
 - [x] reflesh
 - [ ] precise content and comment
-- [ ] icon
+- [x] icon
 - [ ] picture 
 - [ ] login
 
