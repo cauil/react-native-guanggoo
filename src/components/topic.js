@@ -5,6 +5,7 @@ import {
     Text,
     ListView,
     Image,
+    RefreshControl,
     ActivityIndicator
 } from 'react-native';
 
@@ -31,10 +32,12 @@ export default class Topic extends Component {
             topicNum,
             dataHeader: props.data,
             content: [],
+            comment: [],
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 !== r2
             }),
             needLogin,
+            refreshing: false,
         };
     }
     componentDidMount() {
@@ -53,10 +56,14 @@ export default class Topic extends Component {
             </View>
             )
             return this.renderList();
-        } else {
+        } else if(!this.state.refreshing) {
             return (
                 <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
             );
+        } else {
+            return (
+                <View></View>
+            )
         }
     }
     getData() {
@@ -67,14 +74,39 @@ export default class Topic extends Component {
             const {comment, content} = parseTopicData(result);
             this.setState({
                 loaded: true,
+                refreshing: false,
                 dataSource: this.state.dataSource.cloneWithRows(comment),
                 content,
+                comment,
             })
         });
     }
+    onRefresh() {
+        const comment = [];
+        const content = [];
+        this.setState({
+            content,
+            comment,
+            dataSource: this.state.dataSource.cloneWithRows(comment),
+            refreshing: true,
+            loaded: false,
+        });
+        this.getData();
+    }
     renderLoaded() {
         return (
-            <ListView renderHeader={this.renderTopicContent.bind(this)}
+            <ListView
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+                tintColor="#98acdf"
+                colors={["#98acdf", "#356DD0"]}
+                enabled={true}
+                size="large"
+              />
+            }
+            renderHeader={this.renderTopicContent.bind(this)}
             dataSource={this.state.dataSource}
             renderRow={this.renderCommentList.bind(this)}
             renderFooter={this.renderFooter.bind(this)}

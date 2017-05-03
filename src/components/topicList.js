@@ -4,6 +4,7 @@ import {
   Text,
   View,
   ListView,
+  RefreshControl,
   ActivityIndicator,
 } from 'react-native';
 
@@ -31,6 +32,7 @@ export default class Lastest extends Component {
             pageNum: 0,
             List: [],
             needLogin,
+            refreshing: false,
         };
     }
     render() {
@@ -41,10 +43,14 @@ export default class Lastest extends Component {
         }
         if(this.state.loaded && this.state.pageNum > 0) {
             return this.renderList();
-        } else {
+        } else if(!this.state.refreshing) {
             return (
                 <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
             );
+        } else {
+            return (
+                <View></View>
+            )
         }
     }
     componentDidMount() {
@@ -59,8 +65,18 @@ export default class Lastest extends Component {
                 dataSource: this.state.dataSource.cloneWithRows(this.state.List),
                 loaded: true,
                 pageNum: num,
+                refreshing: false,
             })
         });
+    }
+    onRefresh() {
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.state.List),
+            List: [],
+            pageNum: 0,
+            refreshing: true,
+        });
+        this.getData(1);
     }
     renderList() {
         if(this.state.needLogin) {
@@ -72,6 +88,16 @@ export default class Lastest extends Component {
         }
         return (
             <ListView
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+                tintColor="#98acdf"
+                colors={["#98acdf", "#356DD0"]}
+                enabled={true}
+                size="large"
+              />
+            }
             style={Style.listView}
             ref="listview"
             initialListSize={8}
