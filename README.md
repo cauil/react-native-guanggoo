@@ -6,7 +6,7 @@ React-Native IOS APP for www.guanggoo.com
 
 #### IOS
 
-- [ ] reflash
+- [x] reflesh
 - [ ] precise content and comment
 - [ ] icon
 - [ ] picture 
