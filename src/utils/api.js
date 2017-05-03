@@ -19,11 +19,13 @@ function getHtml({type, name, pageNum}) {
           headers: {
             'Accept': 'text/html,application/xhtml+xml,application/xml;',
             'Content-Type': 'application/x-www-form-urlencoded',
+            'cookie':  'user=',
           },
       })
       .then((response) => response.text())
       .then((responseJson) => {
             return responseJson;
+            console.log(responseJson);
       })
       .catch((error) => {
         console.error(error);
