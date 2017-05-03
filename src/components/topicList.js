@@ -11,6 +11,7 @@ import {
 import TopicListCell from './topicListCell';
 import TopicView from './topic';
 import NeedLoginView from './needLoginView.js';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import {getHtml} from '../utils/api';
 import {parseListData} from '../utils/data';
@@ -34,6 +35,10 @@ export default class Lastest extends Component {
             needLogin,
             refreshing: false,
         };
+    }
+    componentWillMount() {
+        Icon.getImageSource('share', 20).then((source) => this.setState({ shareIcon: source }));
+        Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
     }
     render() {
         if(this.state.needLogin) {
@@ -128,6 +133,10 @@ export default class Lastest extends Component {
     selectTopic(data) {
         this.props.navigator.push({
             title: '详细' + (data.count ? '（' + data.count.toString() + '条回复）' : ''),
+            leftButtonIcon: this.state.backIcon,
+            onLeftButtonPress: this.props.navigator.pop,
+            rightButtonIcon: this.state.shareIcon,
+            rightButtonTitle: '分享',
             component: TopicView,
             passProps: {
                 data: data,

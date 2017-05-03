@@ -9,6 +9,7 @@ import {
 
 import TopicList from './components/topicList';
 import Nodes from './components/nodes';
+import Icon, {TabBarItemIOS} from 'react-native-vector-icons/SimpleLineIcons';
 
 export default class guanggoo extends Component {
     static title = '光谷社区';
@@ -25,9 +26,9 @@ export default class guanggoo extends Component {
                 tintColor="#98acdf"
                 unselectedItemTintColor="#555"
                 barTintColor="white">
-                <TabBarIOS.Item
+                <TabBarItemIOS
                   title="最新"
-                  systemIcon="most-recent"
+                  iconName="fire"
                   selected={this.state.selectedTab === 'lastest'}
                   onPress={() => {
                     this.setState({
@@ -42,10 +43,10 @@ export default class guanggoo extends Component {
                           passProps: {name: 'lastest', type: 'tab'}
                         }}
                         itemWrapperStyle={Style.navigator} />
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
+                </TabBarItemIOS>
+                <TabBarItemIOS
                   title="精华"
-                  systemIcon="featured"
+                  iconName="heart"
                   selected={this.state.selectedTab === 'featured'}
                   onPress={() => {
                     this.setState({
@@ -60,10 +61,10 @@ export default class guanggoo extends Component {
                           passProps: {name: 'elite', type: 'tab'}
                         }}
                         itemWrapperStyle={Style.navigator} />
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
+                </TabBarItemIOS>
+                <TabBarItemIOS
                   title="节点"
-                  systemIcon="more"
+                  iconName="tag"
                   selected={this.state.selectedTab === 'more'}
                   onPress={() => {
                     this.setState({
@@ -78,10 +79,10 @@ export default class guanggoo extends Component {
                           passProps: {},
                         }}
                         itemWrapperStyle={Style.navigator} />
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                  title="全部"
-                  systemIcon="bookmarks"
+                </TabBarItemIOS>
+                <TabBarItemIOS
+                  title="用户"
+                  iconName="user"
                   selected={this.state.selectedTab === 'all'}
                   onPress={() => {
                     this.setState({
@@ -89,7 +90,7 @@ export default class guanggoo extends Component {
                     });
                   }}>
                   <View><Text>more</Text></View>
-                </TabBarIOS.Item>
+                </TabBarItemIOS>
               </TabBarIOS>
         );
     }

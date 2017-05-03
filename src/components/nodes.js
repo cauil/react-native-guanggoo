@@ -10,6 +10,7 @@ import {
 
 import {nodes_data, needLoginNodes} from '../utils/const';
 import TopicList from './topicList';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 export default class Nodes extends Component {
     constructor(props) {
@@ -18,6 +19,10 @@ export default class Nodes extends Component {
             nodes: nodes_data,
             loaded: false
         };
+    }
+    componentWillMount() {
+        Icon.getImageSource('share', 20).then((source) => this.setState({ shareIcon: source }));
+        Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
     }
     render() {
         const nodes = this.state.nodes;
@@ -68,6 +73,8 @@ export default class Nodes extends Component {
     selectNode(data){
         this.props.navigator.push({
           title: data.name,
+          leftButtonIcon: this.state.backIcon,
+          onLeftButtonPress: this.props.navigator.pop,
           component: TopicList,
           passProps: {type: 'node', name: data.type},
         });
