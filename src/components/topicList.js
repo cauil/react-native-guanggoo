@@ -100,7 +100,6 @@ export default class Lastest extends Component {
                 tintColor="#98acdf"
                 colors={["#98acdf", "#356DD0"]}
                 enabled={true}
-                size="large"
               />
             }
             style={Style.listView}

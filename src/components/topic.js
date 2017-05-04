@@ -103,7 +103,6 @@ export default class Topic extends Component {
                 tintColor="#98acdf"
                 colors={["#98acdf", "#356DD0"]}
                 enabled={true}
-                size="large"
               />
             }
             renderHeader={this.renderTopicContent.bind(this)}
