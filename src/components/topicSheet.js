@@ -32,11 +32,8 @@ export const Style = StyleSheet.create({
 		borderRadius: 4
 	},
 	content_img: {
-        flex: 1,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        width: 300,
-        height: 300,
+        width: 200,
+        height: 200,
         resizeMode: 'contain',
 	},
 	contentWrapper: {

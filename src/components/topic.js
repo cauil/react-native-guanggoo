@@ -14,8 +14,8 @@ import CommentCell from './commentCell';
 
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
-import {Style} from './topicSheet';
 import {needLoginNodes} from '../utils/const';
+import {Style} from './topicSheet';
 
 export default class Topic extends Component {
     constructor(props) {

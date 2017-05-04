@@ -41,34 +41,11 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string/>
     <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSExceptionDomains</key>
       <dict>
-        <key>localhost</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>baidu.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-          <key>NSTemporaryExceptionMinimumTLSVersion</key>
-          <string>TLSv1.1</string>
-        </dict>
-        <key>guanggoo.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-          <key>NSTemporaryExceptionMinimumTLSVersion</key>
-          <string>TLSv1.1</string>
-        </dict>
+        <!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
       </dict>
-    </dict>
     <key>UIAppFonts</key>
     <array>
       <string>Entypo.ttf</string>

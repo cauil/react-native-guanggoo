@@ -7,10 +7,11 @@ React-Native IOS APP for www.guanggoo.com
 #### IOS
 
 - [x] reflesh
-- [ ] precise content and comment
+- [x] precise content and comment
 - [x] icon
 - [ ] picture 
 - [ ] login
+- [ ] share
 
 #### Andrios
 

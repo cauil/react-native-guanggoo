@@ -74,6 +74,11 @@ const Style = StyleSheet.create({
         marginBottom: 5,
         marginLeft: 7,
     },
+	content_img: {
+        width: 200,
+        height: 200,
+        resizeMode: 'contain',
+	},
     comment_con: {
         fontSize: 12,
         marginLeft: 7,
