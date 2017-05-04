@@ -9,6 +9,7 @@ import {
 
 import TopicList from './components/topicList';
 import Nodes from './components/nodes';
+import User from './components/user';
 import Icon, {TabBarItemIOS} from 'react-native-vector-icons/SimpleLineIcons';
 
 export default class guanggoo extends Component {
@@ -92,7 +93,7 @@ export default class guanggoo extends Component {
                       selectedTab: 'all',
                     });
                   }}>
-                  <View><Text>more</Text></View>
+                  <User />
                 </TabBarItemIOS>
               </TabBarIOS>
         );
