@@ -9,7 +9,7 @@ React-Native IOS APP for www.guanggoo.com
 - [x] reflesh
 - [x] precise content and comment
 - [x] icon
-- [ ] picture 
+- [x] picture 
 - [ ] login
 - [ ] share
 
@@ -19,8 +19,9 @@ coming
 
 ### Update
 
-**2017.5.3
+**2017.5.4
 
+- add user tabbar
 - add icon
 - add pull reflesh
 
