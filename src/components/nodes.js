@@ -77,6 +77,7 @@ export default class Nodes extends Component {
           onLeftButtonPress: this.props.navigator.pop,
           component: TopicList,
           passProps: {type: 'node', name: data.type},
+          showTabBar: false,
         });
     }
 }

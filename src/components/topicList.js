@@ -141,7 +141,8 @@ export default class Lastest extends Component {
             passProps: {
                 data: data,
                 type: 'topic',
-            }
+            },
+            showTabBar: false,
         });
     }
     onEndReached() {

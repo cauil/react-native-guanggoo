@@ -40,7 +40,8 @@ export default class guanggoo extends Component {
                         initialRoute={{
                           title: '最新主题',
                           component: TopicList,
-                          passProps: {name: 'lastest', type: 'tab'}
+                          passProps: {name: 'lastest', type: 'tab'},
+                          showTabBar: true,
                         }}
                         itemWrapperStyle={Style.navigator} />
                 </TabBarItemIOS>
@@ -58,7 +59,8 @@ export default class guanggoo extends Component {
                         initialRoute={{
                           title: '精华主题',
                           component: TopicList,
-                          passProps: {name: 'elite', type: 'tab'}
+                          passProps: {name: 'elite', type: 'tab'},
+                          showTabBar: true,
                         }}
                         itemWrapperStyle={Style.navigator} />
                 </TabBarItemIOS>
@@ -77,6 +79,7 @@ export default class guanggoo extends Component {
                           title: '节点分类',
                           component: Nodes,
                           passProps: {},
+                          showTabBar: true,
                         }}
                         itemWrapperStyle={Style.navigator} />
                 </TabBarItemIOS>
