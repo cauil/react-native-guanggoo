@@ -40,18 +40,35 @@ export default class commentCell extends Component {
 
                     <View>
                         {data.content.map((innerv, i) => {
-                            return (
-                            <View key={i}>
-                                {innerv.img ? <Image style={Style.content_img} source={{uri: innerv.img}} /> : null}
-                                {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
-                            </View>
-                            )
+                            return this.cell(innerv, i);
                         })}
                     </View>
                 </View>
 
             </View>
         );
+    }
+    cell(innerv, i) {
+        let is_absolute_url = false;
+        if(innerv.img && innerv.img.indexOf('http') === -1) {
+            is_absolute_url = true;
+            innerv.img = 'http://www.guanggoo.com' + innerv.img;
+        }
+        if(is_absolute_url) {
+            return (
+            <View key={i}>
+                {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
+                {innerv.img ? <Image style={Style.content_emoji} source={{uri: innerv.img}} /> : null}
+            </View>
+            )
+        } else {
+            return (
+            <View key={i}>
+                {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
+                {innerv.img ? <Image style={Style.content_img} source={{uri: innerv.img}} /> : null}
+            </View>
+            )
+        }
     }
 }
 
@@ -77,6 +94,12 @@ const Style = StyleSheet.create({
 	content_img: {
         width: 200,
         height: 200,
+        resizeMode: 'contain',
+	},
+	content_emoji: {
+        width: 20,
+        height: 20,
+        marginLeft: 10,
         resizeMode: 'contain',
 	},
     comment_con: {

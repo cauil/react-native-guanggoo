@@ -126,12 +126,26 @@ export default class Topic extends Component {
         );
     }
     renderTopicContentCell(v, i) {
-        return (
-            <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
-                {v.img ? <Image style={Style.content_img} source={{uri: v.img}} /> : null}
-                {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
-            </View>
-        )
+        let is_absolute_url = false;
+        if(v.img && v.img.indexOf('http') === -1) {
+            is_absolute_url = true;
+            v.img = 'http://www.guanggoo.com' + v.img;
+        }
+        if(is_absolute_url) {
+            return (
+                <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
+                    {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
+                    {v.img ? <Image style={Style.content_emoji} source={{uri: v.img}} /> : null}
+                </View>
+            )
+        } else {
+            return (
+                <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
+                    {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
+                    {v.img ? <Image style={Style.content_img} source={{uri: v.img}} /> : null}
+                </View>
+            )
+        }
     }
     renderCommentList(data) {
         return (
@@ -179,7 +193,7 @@ export default class Topic extends Component {
     }
     renderFooter() {
         if(this.state.loaded){
-            return <View style={{height: 50}} ><Text></Text></View>;
+            return <View style={{height: 0}} ><Text></Text></View>;
         }
 
         return <ActivityIndicator animating={true}  color="#356DD0" style={{height: 80, marginBottom: 200}} size="large" />

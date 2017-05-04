@@ -36,6 +36,12 @@ export const Style = StyleSheet.create({
         height: 200,
         resizeMode: 'contain',
 	},
+	content_emoji: {
+        width: 20,
+        height: 20,
+        marginLeft: 10,
+        resizeMode: 'contain',
+	},
 	contentWrapper: {
         display: 'flex',
 		borderBottomWidth: 1,
