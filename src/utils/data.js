@@ -28,12 +28,13 @@ function parseTopicData(html) {
     let $ = cheerio.load(html);
     const content = [];
     const content_obj = $('.topic-detail .ui-content p');
+    const content_html = $('.topic-detail .ui-content');
+    const testhtml = content_html.toString();
     for(let i = 0, len = content_obj.length; i < len; i++) {
         const obj = content_obj.eq(i);
         const text = obj.text();
         const img = obj.find('img').attr('src');
-        const a = obj.find('a').text();
-        content.push({text, img, a});
+        content.push({text, img});
     }
 
     const comment = [];
@@ -52,8 +53,7 @@ function parseTopicData(html) {
             const innerobj = content_obj.eq(i);
             const text = innerobj.text();
             const img = innerobj.find('img').attr('src');
-            const a = innerobj.find('a').text();
-            content.push({text, a, img});
+            content.push({text, img});
         }
         comment.push({name, avatar, time, floor, votecount, content});
     }

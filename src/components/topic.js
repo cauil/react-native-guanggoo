@@ -130,7 +130,6 @@ export default class Topic extends Component {
             <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
                 {v.img ? <Image style={Style.content_img} source={{uri: v.img}} /> : null}
                 {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
-                {v.a ? <Text style={Style.content}>{v.a}</Text> : null}
             </View>
         )
     }

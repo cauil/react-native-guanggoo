@@ -44,7 +44,6 @@ export default class commentCell extends Component {
                             <View key={i}>
                                 {innerv.img ? <Image style={Style.content_img} source={{uri: innerv.img}} /> : null}
                                 {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
-                                {innerv.a ? <Text style={[Style.content, Style.comment_con]}>{innerv.a}</Text> : null}
                             </View>
                             )
                         })}
