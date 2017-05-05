@@ -12,6 +12,7 @@ import TopicListCell from './topicListCell';
 import TopicView from './topic';
 import NeedLoginView from './needLoginView.js';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+const CookieManager = require('react-native-cookies');
 
 import {getHtml} from '../utils/api';
 import {parseListData} from '../utils/data';
@@ -44,7 +45,7 @@ export default class Lastest extends Component {
         Icon.getImageSource('share', 20).then((source) => this.setState({ shareIcon: source }));
         Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
 
-        CookieManager.get(HOME_URL, (err, cookie) => { // 判断cookie
+        CookieManager.get(home_url, (err, cookie) => { // 判断cookie
           let isAuthenticated;
           if (cookie && cookie.hasOwnProperty('user')) {
             isAuthenticated = true;

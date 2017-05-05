@@ -3,7 +3,7 @@ const cheerio = require('cheerio-without-node-native');
 import {AsyncStorage} from 'react-native';
 const CookieManager = require('react-native-cookies')
 
-function parseUserInfo(html) {
+async function parseUserInfo(html) {
     const $ = cheerio.load(html)
     const ele = document.querySelector('.ui-header .username').text()
     const topic_num = $('.ui-content .status-topic a').text()
