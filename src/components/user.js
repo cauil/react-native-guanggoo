@@ -21,7 +21,7 @@ export default class User extends Component {
               <Text style={Style.ad}>
                     The mobile guanggoo app created by reactnative。
               </Text>
-            <TouchableHighlight onPress={() => this._onPress('ReactNative GuangGoo', 'http://github.com/cauil/react-native-guanggoo')}>
+            <TouchableHighlight onPress={() => this._onPress('http://github.com/cauil/react-native-guanggoo')}>
               <Text style={Style.link}>
                 http://github.com/cauil/react-native-guanggoo
               </Text>
@@ -29,7 +29,7 @@ export default class User extends Component {
           </View>
         );
     }
-    _onPress(title, url){
+    _onPress(url){
         Linking.openURL(url);
     }
 }
