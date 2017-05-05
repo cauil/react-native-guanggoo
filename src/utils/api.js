@@ -13,13 +13,18 @@ const api = {
 */
 
 function getHtml({type, name, pageNum}) {
-    const url = `${api[type]}${name}${pageNum ? ((type==='node' ? '?p=' : '&p=') + (pageNum)) : ''}`
+    let url = '';
+    if(type === 'home') {
+        url = 'http://www.guanggoo.com'
+    } else {
+        url = `${api[type]}${name}${pageNum ? ((type==='node' ? '?p=' : '&p=') + (pageNum)) : ''}`
+    }
 
       return fetch(url, {
           headers: {
             'Accept': 'text/html,application/xhtml+xml,application/xml;',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'cookie':  'user=',
+            //'cookie':  'user=',
           },
       })
       .then((response) => response.text())
@@ -30,28 +35,6 @@ function getHtml({type, name, pageNum}) {
       .catch((error) => {
         console.error(error);
       });
-      /*
-
-    try {
-        let response = await fetch('http://www.guanggoo.com', {
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        });
-        debugger;
-        let responseJson = await response.json();
-        console.log(responseJson)
-        return responseJson;
-    } catch (error) {
-        console.error(error);
-        React.AlertIOS.alert(
-          'error',
-          '请求失败:'+error.message
-        );
-        return false;
-    }
-    */
 }
 
 export {

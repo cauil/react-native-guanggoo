@@ -18,11 +18,13 @@ import {parseListData} from '../utils/data';
 import {needLoginNodes} from '../utils/const';
 
 let List = [];
+const home_url = 'http://www.guanggoo.com';
+
 export default class Lastest extends Component {
     constructor(props) {
         super(props);
         let needLogin = false;
-        if(props.type === 'node' && (needLoginNodes.indexOf(props.name) > -1) ) {
+        if(props.type === 'node' && (needLoginNodes.indexOf(props.name) > -1) ) { // 节点进入 并且 节点需要权限
             needLogin = true;
         }
         this.state = {
@@ -33,33 +35,57 @@ export default class Lastest extends Component {
             pageNum: 0,
             List: [],
             needLogin,
-            refreshing: false,
+            refreshing: false, // 数据是否在refresh中
+            loggedIn: false,
+            loadedCookie: false,
         };
     }
     componentWillMount() {
         Icon.getImageSource('share', 20).then((source) => this.setState({ shareIcon: source }));
         Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
+
+        CookieManager.get(HOME_URL, (err, cookie) => { // 判断cookie
+          let isAuthenticated;
+          if (cookie && cookie.hasOwnProperty('user')) {
+            isAuthenticated = true;
+          }
+          else {
+            isAuthenticated = false;
+          }
+
+          this.setState({
+            loggedIn: isAuthenticated,
+            loadedCookie: true
+          });
+        });
+    }
+    componentDidMount() {
+        this.getData(1);
     }
     render() {
-        if(this.state.needLogin) {
-            return (
-                <NeedLoginView />
-            )
-        }
-        if(this.state.loaded && this.state.pageNum > 0) {
-            return this.renderList();
-        } else if(!this.state.refreshing) {
-            return (
-                <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
-            );
-        } else {
+        if (this.state.loadedCookie) {
+            if(this.state.needLogin && !this.state.loggedIn) { // 判断cookie  需要权限并且cookie无效
+                return (
+                    <NeedLoginView />
+                )
+            } 
+            // 可以加载
+            if(this.state.loaded && this.state.pageNum > 0) { // 加载完毕
+                return this.renderList();
+            } else if(this.state.refreshing) { // 还在refreshing
+                return (
+                    <View></View>
+                )
+            } else { // 不在refresh中
+                return (
+                    <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
+                );
+            }
+        } else { //
             return (
                 <View></View>
             )
         }
-    }
-    componentDidMount() {
-        this.getData(1);
     }
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};
@@ -84,13 +110,6 @@ export default class Lastest extends Component {
         this.getData(1);
     }
     renderList() {
-        if(this.state.needLogin) {
-            return (
-                <View style={Style.login_container}>
-                    <Text>请先登录社区再完成操作!</Text>
-                </View>
-            )
-        }
         return (
             <ListView
             refreshControl={

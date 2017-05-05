@@ -1,5 +1,42 @@
 const cheerio = require('cheerio-without-node-native');
 
+import {AsyncStorage} from 'react-native';
+const CookieManager = require('react-native-cookies')
+
+function parseUserInfo(html) {
+    const $ = cheerio.load(html)
+    const ele = document.querySelector('.ui-header .username').text()
+    const topic_num = $('.ui-content .status-topic a').text()
+    const topic_url = $('.ui-content .status-topic a').attr('href')
+    const reply_num = $('.ui-content .status-reply a').text()
+    const reply_url = $('.ui-content .status-reply a').attr('href')
+    const favor_num = $('.ui-content .status-favorites a').text()
+    const favor_url = $('.ui-content .status-favorites a').attr('href')
+    const repu_num = $('.ui-content .status-reputation a').text()
+    const repu_url = $('.ui-content .status-reputation a').attr('href')
+
+    if(ele) {
+        const obj = {
+            logined,
+            username,
+            topic_num,
+            topic_url,
+            reply_num,
+            reply_url,
+            favor_num,
+            favor_url,
+            repu_num,
+            repu_url,
+        }
+        const value = await AsyncStorage.mergeItem('http://www.guanggoo.com', JSON.stringify(obj))
+        if(value) {
+            return obj
+        }
+    } else {
+        return false
+    }
+}
+
 function parseListData(html) {
     const result = [];
     const $ = cheerio.load(html);
