@@ -5,7 +5,7 @@ const CookieManager = require('react-native-cookies')
 
 async function parseUserInfo(html) {
     const $ = cheerio.load(html)
-    const ele = document.querySelector('.ui-header .username').text()
+    const username = document.querySelector('.ui-header .username').text()
     const topic_num = $('.ui-content .status-topic a').text()
     const topic_url = $('.ui-content .status-topic a').attr('href')
     const reply_num = $('.ui-content .status-reply a').text()
