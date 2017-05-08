@@ -12,6 +12,7 @@ import {
 import NeedLoginView from './needLoginView.js';
 import CommentCell from './commentCell';
 import DoLogin from './doLogin';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
@@ -47,6 +48,8 @@ export default class Topic extends Component {
         };
     }
     componentWillMount() {
+        Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
+
         CookieManager.get(home_url, (err, cookie) => { // 判断cookie
           let isAuthenticated;
           if (cookie && cookie.hasOwnProperty('user')) {
@@ -96,11 +99,10 @@ export default class Topic extends Component {
     }
     doLogin() {
         this.props.navigator.push({
-            title: ' ',
+            title: '',
             leftButtonIcon: this.state.backIcon,
+            leftButtonTitle: '',
             onLeftButtonPress: this.props.navigator.pop,
-            //rightButtonIcon: this.state.shareIcon,
-            //rightButtonTitle: '分享',
             component: DoLogin,
             passProps: {
                 //data: data,

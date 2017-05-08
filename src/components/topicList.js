@@ -91,9 +91,10 @@ export default class Lastest extends Component {
     }
     doLogin() {
         this.props.navigator.push({
-            title: ' ',
-            //leftButtonIcon: this.state.backIcon,
-            //onLeftButtonPress: this.props.navigator.pop,
+            title: '',
+            leftButtonTitle: '',
+            leftButtonIcon: this.state.backIcon,
+            onLeftButtonPress: this.props.navigator.pop,
             //rightButtonIcon: this.state.shareIcon,
             //rightButtonTitle: '分享',
             component: DoLogin,
