@@ -11,7 +11,7 @@ import {
 
 import NeedLoginView from './needLoginView.js';
 import CommentCell from './commentCell';
-import DoLogin from './doLogin';
+import Login from './login';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import {getHtml} from '../utils/api';
@@ -52,6 +52,7 @@ export default class Topic extends Component {
 
         CookieManager.get(home_url, (err, cookie) => { // 判断cookie
           let isAuthenticated;
+          console.log(cookie);
           if (cookie && cookie.hasOwnProperty('user')) {
             isAuthenticated = true;
           }
@@ -103,10 +104,8 @@ export default class Topic extends Component {
             leftButtonIcon: this.state.backIcon,
             leftButtonTitle: '',
             onLeftButtonPress: this.props.navigator.pop,
-            component: DoLogin,
+            component: Login,
             passProps: {
-                //data: data,
-                //type: 'topic',
             },
             showTabBar: false,
         });

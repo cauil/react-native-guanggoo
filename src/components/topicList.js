@@ -10,7 +10,7 @@ import {
 
 import TopicListCell from './topicListCell';
 import TopicView from './topic';
-import DoLogin from './doLogin';
+import Login from './login';
 import NeedLoginView from './needLoginView.js';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const CookieManager = require('react-native-cookies');
@@ -97,7 +97,7 @@ export default class Lastest extends Component {
             onLeftButtonPress: this.props.navigator.pop,
             //rightButtonIcon: this.state.shareIcon,
             //rightButtonTitle: '分享',
-            component: DoLogin,
+            component: Login,
             passProps: {
                 //data: data,
                 //type: 'topic',
