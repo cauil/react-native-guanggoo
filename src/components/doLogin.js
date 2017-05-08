@@ -9,8 +9,8 @@ import {
 
 
 const login_url = 'http://www.guanggoo.com/login'
-const home_url = 'http://www.guanggoo.com'
-const debug = false
+const home_url = 'http://www.guanggoo.com/'
+const debug = true
 const inject_script = `
     var obj
     let logined = false;
@@ -76,11 +76,13 @@ export default class DoLogin extends Component {
             console.log(`debugger: webview navigationState change`)
             console.log(state);
         }
-        if(state.url === home_url && state.loading) {
+        //if(state.url === home_url && state.loading) {
+        //if(state.loading) {
             this.webview && this.webview.injectJavaScript(inject_script)
-        }
+        //}
     }
     async onMessage(e) {
+        console.log('onmessage')
         if(debug) {
             console.log(`debugger: get data from webview:`)
             console.log(e)

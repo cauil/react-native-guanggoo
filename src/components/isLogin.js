@@ -5,8 +5,8 @@ import {parseUserInfo} from '../utils/data';
 
 const debug = true
 
-export default function isLogin(url='http://www.guanggoo.com') {
-    const value = await AsyncStorage.getItem('url')
+export default async function isLogin(url='http://www.guanggoo.com') {
+    const value = await AsyncStorage.getItem('username')
     if (value !== null){
         if(debug) {
             console.log('debug: Get storage data: ')
@@ -15,7 +15,7 @@ export default function isLogin(url='http://www.guanggoo.com') {
 
         const obj = JSON.parse(value)
         if(obj.logined) {
-            const data = {type: this.props.type, name: this.props.name, pageNum: num}
+            const data = {type: 'home'}
             getHtml(data).then( (result) => {
                 const info = parseUserInfo(result)
                 if(!info) {
