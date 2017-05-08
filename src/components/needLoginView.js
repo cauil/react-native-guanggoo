@@ -16,8 +16,8 @@ export default class NeedLoginView extends Component {
                 <Text style={Style.text}>本主题需要登录社区后才能展示!</Text>
                 <Button
                   onPress={this.props.onSelect}
-                  title="马上登陆"
-                  color="#841584"
+                  title="点我登陆"
+                  color="#98acdf"
                   accessibilityLabel="Learn more about this purple button"
                 />
             </View>
@@ -36,5 +36,6 @@ const Style = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
         color: '#356DD0',
+        marginBottom: 10,
     },
 });
