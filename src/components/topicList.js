@@ -10,6 +10,7 @@ import {
 
 import TopicListCell from './topicListCell';
 import TopicView from './topic';
+import DoLogin from './doLogin';
 import NeedLoginView from './needLoginView.js';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const CookieManager = require('react-native-cookies');
@@ -67,7 +68,7 @@ export default class Lastest extends Component {
         if (this.state.loadedCookie) {
             if(this.state.needLogin && !this.state.loggedIn) { // 判断cookie  需要权限并且cookie无效
                 return (
-                    <NeedLoginView />
+                    <NeedLoginView onSelect={this.doLogin.bind(this)} />
                 )
             } 
             // 可以加载
@@ -87,6 +88,21 @@ export default class Lastest extends Component {
                 <View></View>
             )
         }
+    }
+    doLogin() {
+        this.props.navigator.push({
+            title: ' ',
+            //leftButtonIcon: this.state.backIcon,
+            //onLeftButtonPress: this.props.navigator.pop,
+            //rightButtonIcon: this.state.shareIcon,
+            //rightButtonTitle: '分享',
+            component: DoLogin,
+            passProps: {
+                //data: data,
+                //type: 'topic',
+            },
+            showTabBar: false,
+        });
     }
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};

@@ -11,11 +11,15 @@ import {
 
 import NeedLoginView from './needLoginView.js';
 import CommentCell from './commentCell';
+import DoLogin from './doLogin';
 
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
 import {needLoginNodes} from '../utils/const';
 import {Style} from './topicSheet';
+
+const CookieManager = require('react-native-cookies');
+const home_url = 'http://www.guanggoo.com';
 
 export default class Topic extends Component {
     constructor(props) {
@@ -38,37 +42,74 @@ export default class Topic extends Component {
             }),
             needLogin,
             refreshing: false,
+            loggedIn: false,
+            loadedCookie: false,
         };
+    }
+    componentWillMount() {
+        CookieManager.get(home_url, (err, cookie) => { // 判断cookie
+          let isAuthenticated;
+          if (cookie && cookie.hasOwnProperty('user')) {
+            isAuthenticated = true;
+          }
+          else {
+            isAuthenticated = false;
+          }
+
+          this.setState({
+            loggedIn: isAuthenticated,
+            loadedCookie: true
+          });
+        });
     }
     componentDidMount() {
         this.getData();
     }
     render() {
-        if(this.state.needLogin) {
-            return (
-                <NeedLoginView />
-            )
-        } else if(this.state.loaded) {
-            return (
-            <View style={{flex:1, marginTop: 65}}>
-                {this.renderTopicHeader()}
-                {this.renderLoaded()}
-            </View>
-            )
-            return this.renderList();
-        } else if(!this.state.refreshing) {
-            return (
-                <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
-            );
+        if(this.state.loadedCookie) {
+            if(this.state.needLogin && !this.state.loggedIn) {
+                return (
+                    <NeedLoginView onSelect={this.doLogin.bind(this)} />
+                )
+            }
+            if(this.state.loaded) {
+                return (
+                <View style={{flex:1, marginTop: 65}}>
+                    {this.renderTopicHeader()}
+                    {this.renderLoaded()}
+                </View>
+                )
+            } else if (this.state.refreshing) {
+                return (
+                    <View></View>
+                )
+            } else {
+                return (
+                    <ActivityIndicator animating={true}  color="#356DD0" style={[Style.centering], {height: 80, marginTop: 100}} size="large" />
+                );
+            } 
         } else {
             return (
                 <View></View>
             )
         }
     }
+    doLogin() {
+        this.props.navigator.push({
+            title: ' ',
+            leftButtonIcon: this.state.backIcon,
+            onLeftButtonPress: this.props.navigator.pop,
+            //rightButtonIcon: this.state.shareIcon,
+            //rightButtonTitle: '分享',
+            component: DoLogin,
+            passProps: {
+                //data: data,
+                //type: 'topic',
+            },
+            showTabBar: false,
+        });
+    }
     getData() {
-        if(this.state.needLogin) {return;}
-
         const data = {type: this.props.type, name: this.state.topicNum};
         getHtml(data).then( (result) => {
             const {comment, content} = parseTopicData(result);
@@ -89,7 +130,6 @@ export default class Topic extends Component {
             comment,
             dataSource: this.state.dataSource.cloneWithRows(comment),
             refreshing: true,
-            loaded: false,
         });
         this.getData();
     }

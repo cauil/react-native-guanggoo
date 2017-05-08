@@ -2,14 +2,24 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
+  Button,
   View,
 } from 'react-native';
 
-export default class needLoginView extends Component {
+export default class NeedLoginView extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <View style={Style.login_container}>
                 <Text style={Style.text}>本主题需要登录社区后才能展示!</Text>
+                <Button
+                  onPress={this.props.onSelect}
+                  title="马上登陆"
+                  color="#841584"
+                  accessibilityLabel="Learn more about this purple button"
+                />
             </View>
         )
     }

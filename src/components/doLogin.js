@@ -10,7 +10,7 @@ import {
 
 const login_url = 'http://www.guanggoo.com/login'
 const home_url = 'http://www.guanggoo.com'
-const debug = true
+const debug = false
 const inject_script = `
     var obj
     let logined = false;
@@ -56,8 +56,8 @@ export default class DoLogin extends Component {
         }
     }
     render() {
+        console.log(this.state);
         return (
-          <View style={[styles.container]}>
             <WebView
               ref={'webview'}
               automaticallyAdjustContentInsets={false}
@@ -69,7 +69,6 @@ export default class DoLogin extends Component {
               scalesPageToFit={true}
               onMessage={this.onMessage}
             />
-          </View>
         );
     }
     onNavigationStateChange(state) {
@@ -81,7 +80,7 @@ export default class DoLogin extends Component {
             this.webview && this.webview.injectJavaScript(inject_script)
         }
     }
-    onMessage(e) {
+    async onMessage(e) {
         if(debug) {
             console.log(`debugger: get data from webview:`)
             console.log(e)
