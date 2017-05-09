@@ -30,7 +30,6 @@ function getHtml({type, name, pageNum}) {
       .then((response) => response.text())
       .then((responseJson) => {
             return responseJson;
-            console.log(responseJson);
       })
       .catch((error) => {
         console.error(error);

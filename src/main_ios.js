@@ -93,7 +93,15 @@ export default class guanggoo extends Component {
                       selectedTab: 'all',
                     });
                   }}>
-                  <User />
+                    <NavigatorIOS style={Style.container}
+                        tintColor={'#333344'}
+                        initialRoute={{
+                          title: '用户信息',
+                          component: User,
+                          passProps: {},
+                          showTabBar: true,
+                        }}
+                        itemWrapperStyle={Style.navigator} />
                 </TabBarItemIOS>
               </TabBarIOS>
         );
