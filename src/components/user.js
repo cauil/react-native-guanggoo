@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 const CookieManager = require('react-native-cookies');
+const home_url = 'http://www.guanggoo.com/'
 
 export default class User extends Component {
     constructor(props) {

@@ -33,22 +33,24 @@ export default class Login extends Component {
             </View>
             <View style={styles.item}>
                 <Text style={{width:70}}>密码</Text>
-            <TextInput
-                style={styles.input}
-                onChangeText={this.onChangePswd.bind(this)}
-                placeholder='请输入密码'
-                secureTextEntry={true}
-                value={this.state.password}
-            />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={this.onChangePswd.bind(this)}
+                    placeholder='请输入密码'
+                    secureTextEntry={true}
+                    value={this.state.password}
+                />
             </View>
+            <View style={styles.button_container}>
             <TouchableHighlight style={styles.button} underlayColor='#98acdf' onPress={this.login.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>登陆</Text>
             </TouchableHighlight>
-            <View style={{display: 'flex', flexDirection:'column', flex: 1}}>
-            <TouchableHighlight style={styles.button} underlayColor='#98acdf' onPress={this.register.bind(this)}>
+            </View>
+            <View style={[styles.button_container, {justifyContent: 'space-between'}]}>
+            <TouchableHighlight style={styles.two_button} underlayColor='#98acdf' onPress={this.register.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>注册</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.button} underlayColor='#98acdf' onPress={this.reset.bind(this)}>
+            <TouchableHighlight style={styles.two_button} underlayColor='#98acdf' onPress={this.reset.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>重置密码</Text>
             </TouchableHighlight>
             </View>
@@ -103,6 +105,13 @@ const styles = StyleSheet.create({
       height:50,
       width:200,
     },
+    button_container:{
+      flexDirection:'row',
+      alignItems:'center',
+      height:50,
+      width:'100%',
+      marginBottom: 7,
+    },
     input:{
       fontSize:14,
         width:150,
@@ -111,6 +120,16 @@ const styles = StyleSheet.create({
         flex: 1,
       backgroundColor:'#aaaaaa',
       height:50,
+      marginTop:10,
+      borderRadius: 7,
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    two_button:{
+      backgroundColor:'#aaaaaa',
+      width: '49%',
+      height:50,
+      borderRadius: 7,
       marginTop:10,
       justifyContent:'center',
       alignItems:'center'
