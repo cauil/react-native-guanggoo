@@ -15,6 +15,7 @@ import Login from './login';
 
 const CookieManager = require('react-native-cookies');
 const home_url = 'http://www.guanggoo.com'
+const default_img = 'http://cdn.guanggoo.com/static/avatar/28/m_default.png'
 
 export default class User extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class User extends Component {
         this.state = {
             username: '未登陆',
             logined: false,
-            url: 'http://cdn.guanggoo.com/static/avatar/28/m_default.png',
+            url: default_img,
         };
     }
     async getInfo() {
@@ -60,7 +61,7 @@ export default class User extends Component {
                 </View>
                 <View style={Style.button_container}>
                     {this.state.logined ? (
-                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this.logout}>
+                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this.logout.bind(this)}>
                             <Text style={{fontSize:16,color:'#fff'}}>退出登陆</Text>
                         </TouchableHighlight>
                     ) : null}
@@ -81,6 +82,11 @@ export default class User extends Component {
           console.log('cookies cleared!');
           console.log(err);
           console.log(res);
+          this.setState({
+              logined: false,
+              username: '未登陆',
+              url: default_img
+          })
         });
     }
     _login() {
