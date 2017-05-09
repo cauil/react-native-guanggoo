@@ -19,18 +19,10 @@ export default class Load extends Component {
           <View style={Style.container}>
               <Image style={Style.logo} source={{uri: 'http://cdn.guanggoo.com/static/images/guanggoonew.png'}} />
               <Text style={Style.ad}>
-                    The mobile guanggoo app created by reactnative。
+                    Powered by React-Native
               </Text>
-            <TouchableHighlight onPress={() => this._onPress('http://github.com/cauil/react-native-guanggoo')}>
-              <Text style={Style.link}>
-                http://github.com/cauil/react-native-guanggoo
-              </Text>
-            </TouchableHighlight>
           </View>
         );
-    }
-    _onPress(url){
-        Linking.openURL(url);
     }
 }
 
@@ -43,13 +35,10 @@ const Style = StyleSheet.create({
         padding: 10
     },
     ad: {
+        color: '#00abe4',
         fontSize: 18,
         fontWeight: 'bold',
-        textAlign: 'left'
-    },
-    link: {
-        marginTop: 20,
-        color: '#356DD0',
+        textAlign: 'center'
     },
     logo: {
         height: 150,
