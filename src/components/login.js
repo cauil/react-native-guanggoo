@@ -70,7 +70,7 @@ export default class Login extends Component {
         Linking.openURL('http://www.guanggoo.com/register')
     }
     login() {
-        if(!this.state.Email||!this.state.password){
+        if(!this.state.email||!this.state.password){
             Alert.alert(
                 '提示',
                 '用户名或密码不能为空！',
@@ -87,6 +87,10 @@ export default class Login extends Component {
             method: 'post',
         })
         .then((response) => {
+            if(response.status === 200) {
+                this.props.cb();
+                this.props.navigator.pop();
+            }
             return response.text()
         })
         .then((responseJson) => {

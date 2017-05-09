@@ -52,7 +52,6 @@ export default class Topic extends Component {
 
         CookieManager.get(home_url, (err, cookie) => { // 判断cookie
           let isAuthenticated;
-          console.log(cookie);
           if (cookie && cookie.hasOwnProperty('user')) {
             isAuthenticated = true;
           }
@@ -106,9 +105,16 @@ export default class Topic extends Component {
             onLeftButtonPress: this.props.navigator.pop,
             component: Login,
             passProps: {
+                cb: this.loginCb.bind(this),
             },
             showTabBar: false,
         });
+    }
+    loginCb() {
+        this.getData();
+        this.setState({
+            loggedIn: true,
+        })
     }
     getData() {
         const data = {type: this.props.type, name: this.state.topicNum};

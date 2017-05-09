@@ -95,15 +95,18 @@ export default class Lastest extends Component {
             leftButtonTitle: '',
             leftButtonIcon: this.state.backIcon,
             onLeftButtonPress: this.props.navigator.pop,
-            //rightButtonIcon: this.state.shareIcon,
-            //rightButtonTitle: '分享',
             component: Login,
             passProps: {
-                //data: data,
-                //type: 'topic',
+                cb: this.loginCb.bind(this)
             },
             showTabBar: false,
         });
+    }
+    loginCb() {
+        this.getData(1);
+        this.setState({
+            loggedIn: true,
+        })
     }
     getData(num) {
         const data = {type: this.props.type, name: this.props.name, pageNum: num};
@@ -142,6 +145,7 @@ export default class Lastest extends Component {
             style={Style.listView}
             ref="listview"
             initialListSize={8}
+            enableEmptySections={true}
             dataSource={this.state.dataSource}
             renderFooter={this.renderFooter.bind(this)}
             renderRow={this.renderTopicListCell.bind(this)}
