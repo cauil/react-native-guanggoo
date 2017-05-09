@@ -7,16 +7,20 @@ import {
     Alert,
     Linking,
     Modal,
+    AsyncStorage,
     TouchableHighlight,
 } from 'react-native';
 
 import {getUUID, serializeJSON} from '../utils/helper'
+import {getHtml} from '../utils/api';
+import {parseUserInfo} from '../utils/data';
+
 const CookieManager = require('react-native-cookies');
+const home_url = 'http://www.guanggoo.com'
 
 class MyModal extends Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {
             modalVisible: false // 控制modal
         }
@@ -128,15 +132,23 @@ export default class Login extends Component {
         })
         .then((response) => {
             if(response.status === 200) {
-                CookieManager.get('http://www.guanggoo.com', (err, cookie) => { // 判断cookie
+                CookieManager.get(home_url, (err, cookie) => { // 判断cookie
                   if (cookie && cookie.hasOwnProperty('user')) {
-                    console.log(response)
-                    this.setState({notice: '登陆成功！'})
-                    this.props.cb();
-                    setTimeout(() => {
-                        this.props.navigator.pop();
-                        this.setState({logining: false})
-                    }, 500)
+
+                    // 更新 userName以及url
+                    const data = {type: 'home'};
+                    getHtml(data).then( (result) => {
+                        const obj = parseUserInfo(result)
+                        AsyncStorage.setItem(home_url, JSON.stringify(obj), () => {
+                            this.setState({notice: '登陆成功！'})
+                            this.props.cb();
+
+                            setTimeout(() => {
+                                this.props.navigator.pop();
+                                this.setState({logining: false})
+                            }, 500)
+                        });
+                    })
                   } else {
                     this.setState({notice: '登陆失败！'})
                     setTimeout(() => {

@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Login from './login';
 
 const CookieManager = require('react-native-cookies');
-const home_url = 'http://www.guanggoo.com/'
+const home_url = 'http://www.guanggoo.com'
 
 export default class User extends Component {
     constructor(props) {
@@ -26,35 +26,19 @@ export default class User extends Component {
         };
     }
     async getInfo() {
-        const value = await AsyncStorage.getItem('username')
-        const url = await AsyncStorage.getItem('url')
+        const value = await AsyncStorage.getItem(home_url)
         if(value) {
+          const info = JSON.parse(value)
           this.setState({
-            loggedIn: true,
-            username: value,
+            logined: true,
+            username: info.username,
+            url: info.url,
           });
         }
     }
     componentWillMount() {
         Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
         this.getInfo();
-        /*
-        CookieManager.get(home_url, (err, cookie) => { // 判断cookie
-          let isAuthenticated;
-          console.log(cookie);
-          if (cookie && cookie.hasOwnProperty('user')) {
-            isAuthenticated = true;
-          }
-          else {
-            isAuthenticated = false;
-          }
-
-          this.setState({
-            loggedIn: isAuthenticated,
-            loadedCookie: true
-          });
-        });
-        */
     }
     render() {
         return (
@@ -76,7 +60,7 @@ export default class User extends Component {
                 </View>
                 <View style={Style.button_container}>
                     {this.state.logined ? (
-                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this._onSelect}>
+                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this.logout}>
                             <Text style={{fontSize:16,color:'#fff'}}>退出登陆</Text>
                         </TouchableHighlight>
                     ) : null}
@@ -91,7 +75,8 @@ export default class User extends Component {
     }
     renderInfo() {
     }
-    _onSelect() {
+    async logout() {
+        await AsyncStorage.removeItem(home_url)
         CookieManager.clearAll((err, res) => {
           console.log('cookies cleared!');
           console.log(err);

@@ -3,9 +3,10 @@ const cheerio = require('cheerio-without-node-native');
 import {AsyncStorage} from 'react-native';
 const CookieManager = require('react-native-cookies')
 
-async function parseUserInfo(html) {
+function parseUserInfo(html) {
     const $ = cheerio.load(html)
-    const username = document.querySelector('.ui-header .username').text()
+    const username = $('.ui-header .username').text()
+    const url = $('.ui-header .avatar').attr('src')
     const topic_num = $('.ui-content .status-topic a').text()
     const topic_url = $('.ui-content .status-topic a').attr('href')
     const reply_num = $('.ui-content .status-reply a').text()
@@ -15,9 +16,9 @@ async function parseUserInfo(html) {
     const repu_num = $('.ui-content .status-reputation a').text()
     const repu_url = $('.ui-content .status-reputation a').attr('href')
 
-    if(ele) {
-        const obj = {
-            logined,
+    if(username) {
+        return {
+            url,
             username,
             topic_num,
             topic_url,
@@ -27,10 +28,6 @@ async function parseUserInfo(html) {
             favor_url,
             repu_num,
             repu_url,
-        }
-        const value = await AsyncStorage.mergeItem('http://www.guanggoo.com', JSON.stringify(obj))
-        if(value) {
-            return obj
         }
     } else {
         return false
@@ -100,4 +97,5 @@ function parseTopicData(html) {
 export {
     parseListData,
     parseTopicData,
+    parseUserInfo,
 }
