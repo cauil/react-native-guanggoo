@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   View,
+  TouchableHighlight,
 } from 'react-native';
 
 export default class NeedLoginView extends Component {
@@ -14,12 +15,11 @@ export default class NeedLoginView extends Component {
         return (
             <View style={Style.login_container}>
                 <Text style={Style.text}>本主题需要登录社区后才能展示!</Text>
-                <Button
-                  onPress={this.props.onSelect}
-                  title="点我登陆"
-                  color="#98acdf"
-                  accessibilityLabel="Learn more about this purple button"
-                />
+                <View style={Style.button_container}>
+                <TouchableHighlight style={Style.button} underlayColor='#98acdf' onPress={this.props.onSelect}>
+                    <Text style={{fontSize:16,color:'#fff'}}>点我登陆</Text>
+                </TouchableHighlight>
+                </View>
             </View>
         )
     }
@@ -27,6 +27,7 @@ export default class NeedLoginView extends Component {
 
 const Style = StyleSheet.create({
     login_container: {
+        padding: 50,
         backgroundColor: '#eeeeee',
         flex:1,
         justifyContent: 'center',
@@ -35,7 +36,25 @@ const Style = StyleSheet.create({
     text: {
         fontSize: 17,
         fontWeight: 'bold',
-        color: '#356DD0',
+        color: '#98acdf',
         marginBottom: 10,
+    },
+    button_container:{
+      paddingLeft: 70,
+      paddingRight: 70,
+      flexDirection:'row',
+      alignItems:'center',
+      height:50,
+      width:'100%',
+      marginBottom: 7,
+    },
+    button:{
+        flex: 1,
+      backgroundColor:'#aaaaaa',
+      height:50,
+      marginTop:10,
+      borderRadius: 7,
+      justifyContent:'center',
+      alignItems:'center'
     },
 });

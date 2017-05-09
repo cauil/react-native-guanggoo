@@ -58,7 +58,7 @@ export default class Login extends Component {
     render() {
         return (
         <View style={{padding:20,marginTop:50}}>
-            <View style={styles.item}><Text style={{width:70}}>邮箱号码</Text>
+            <View style={styles.item}><Text style={{width:70, color: '#98acdf'}}>邮箱号码</Text>
                 <TextInput
                 style={styles.input}
                 onChangeText={this.onChangeEmail.bind(this)}
@@ -67,7 +67,7 @@ export default class Login extends Component {
                 />
             </View>
             <View style={styles.item}>
-                <Text style={{width:70}}>密码</Text>
+                <Text style={{width:70, color: '#98acdf'}}>密码</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={this.onChangePswd.bind(this)}
