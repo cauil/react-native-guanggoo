@@ -15,6 +15,7 @@ export const Style = StyleSheet.create({
 		padding: 5,
 	},
 	title: {
+        color: '#444',
 		fontSize: 16,
 		fontWeight: 'bold',
 		textAlign: 'left'

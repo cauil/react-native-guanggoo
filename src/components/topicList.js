@@ -91,7 +91,7 @@ export default class Lastest extends Component {
     }
     doLogin() {
         this.props.navigator.push({
-            title: '',
+            title: '登陆',
             leftButtonTitle: '',
             leftButtonIcon: this.state.backIcon,
             onLeftButtonPress: this.props.navigator.pop,

@@ -37,7 +37,8 @@ export default class guanggoo extends Component {
                     });
                   }}>
                     <NavigatorIOS style={Style.container}
-                        tintColor={'#333344'}
+                        tintColor='#98acdf'
+                        titleTextColor='#444'
                         initialRoute={{
                           title: '最新主题',
                           component: TopicList,
@@ -56,7 +57,8 @@ export default class guanggoo extends Component {
                     });
                   }}>
                     <NavigatorIOS style={Style.container}
-                        tintColor={'#333344'}
+                        tintColor='#98acdf'
+                        titleTextColor='#444'
                         initialRoute={{
                           title: '精华主题',
                           component: TopicList,
@@ -75,7 +77,8 @@ export default class guanggoo extends Component {
                     });
                   }}>
                     <NavigatorIOS style={Style.container}
-                        tintColor={'#333344'}
+                        tintColor='#333344'
+                        titleTextColor='#444'
                         initialRoute={{
                           title: '节点分类',
                           component: Nodes,
@@ -94,7 +97,8 @@ export default class guanggoo extends Component {
                     });
                   }}>
                     <NavigatorIOS style={Style.container}
-                        tintColor={'#333344'}
+                        tintColor='#98acdf'
+                        titleTextColor='#444'
                         initialRoute={{
                           title: '用户信息',
                           component: User,

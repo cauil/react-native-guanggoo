@@ -99,7 +99,7 @@ export default class Topic extends Component {
     }
     doLogin() {
         this.props.navigator.push({
-            title: '',
+            title: '登陆',
             leftButtonIcon: this.state.backIcon,
             leftButtonTitle: '',
             onLeftButtonPress: this.props.navigator.pop,
