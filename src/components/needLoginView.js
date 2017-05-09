@@ -16,7 +16,7 @@ export default class NeedLoginView extends Component {
             <View style={Style.login_container}>
                 <Text style={Style.text}>本主题需要登录社区后才能展示!</Text>
                 <View style={Style.button_container}>
-                <TouchableHighlight style={Style.button} underlayColor='#98acdf' onPress={this.props.onSelect}>
+                <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this.props.onSelect}>
                     <Text style={{fontSize:16,color:'#fff'}}>点我登陆</Text>
                 </TouchableHighlight>
                 </View>
@@ -50,7 +50,7 @@ const Style = StyleSheet.create({
     },
     button:{
         flex: 1,
-      backgroundColor:'#aaaaaa',
+      backgroundColor:'#98acdf',
       height:50,
       marginTop:10,
       borderRadius: 7,

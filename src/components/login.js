@@ -77,15 +77,15 @@ export default class Login extends Component {
                 />
             </View>
             <View style={styles.button_container}>
-            <TouchableHighlight style={styles.button} underlayColor='#98acdf' onPress={this.login.bind(this)}>
+            <TouchableHighlight style={styles.button} underlayColor='#737ab7' onPress={this.login.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>登陆</Text>
             </TouchableHighlight>
             </View>
             <View style={[styles.button_container, {justifyContent: 'space-between'}]}>
-            <TouchableHighlight style={styles.two_button} underlayColor='#98acdf' onPress={this.register.bind(this)}>
+            <TouchableHighlight style={styles.two_button} underlayColor='#737ab7' onPress={this.register.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>注册</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.two_button} underlayColor='#98acdf' onPress={this.reset.bind(this)}>
+            <TouchableHighlight style={styles.two_button} underlayColor='#737ab7' onPress={this.reset.bind(this)}>
                 <Text style={{fontSize:16,color:'#fff'}}>重置密码</Text>
             </TouchableHighlight>
             </View>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     },
     button:{
         flex: 1,
-      backgroundColor:'#aaaaaa',
+      backgroundColor:'#98acdf',
       height:50,
       marginTop:10,
       borderRadius: 7,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
       alignItems:'center'
     },
     two_button:{
-      backgroundColor:'#aaaaaa',
+      backgroundColor:'#98acdf',
       width: '49%',
       height:50,
       borderRadius: 7,
