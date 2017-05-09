@@ -6,10 +6,44 @@ import {
     Text,
     Alert,
     Linking,
+    Modal,
     TouchableHighlight,
 } from 'react-native';
 
 import {getUUID, serializeJSON} from '../utils/helper'
+const CookieManager = require('react-native-cookies');
+
+class MyModal extends Component {
+    constructor(props) {
+        super(props)
+        console.log(props)
+        this.state = {
+            modalVisible: false // 控制modal
+        }
+    }
+    componentWillReceiveProps(props) {
+        this.setState({modalVisible: props.modalVisible})
+    }
+    render() {
+        return (
+          <View style={styles.container}>
+            <Modal
+              animationType={"fade"}
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {alert("Modal has been closed.")}}
+              >
+                 <View style={styles.container}>
+                  <View>
+                    <Text style={styles.success_notice}>{this.props.notice}</Text>
+                  </View>
+                 </View>
+            </Modal>
+          </View>
+        )
+    }
+
+}
 
 export default class Login extends Component {
     constructor(props) {
@@ -18,6 +52,7 @@ export default class Login extends Component {
             email: '',
             password: '',
             _xsrf: getUUID(),
+            logining: false, //是否在登陆中
         };
     }
     render() {
@@ -54,6 +89,7 @@ export default class Login extends Component {
                 <Text style={{fontSize:16,color:'#fff'}}>重置密码</Text>
             </TouchableHighlight>
             </View>
+            <MyModal modalVisible={this.state.logining} notice={this.state.notice} />
         </View>
         );
     }
@@ -77,6 +113,10 @@ export default class Login extends Component {
             )
             return
         }
+        this.setState({
+            logining: true,
+            notice: '登陆中'
+        })
         fetch('http://www.guanggoo.com/login', {
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -88,10 +128,29 @@ export default class Login extends Component {
         })
         .then((response) => {
             if(response.status === 200) {
-                this.props.cb();
-                this.props.navigator.pop();
+                CookieManager.get('http://www.guanggoo.com', (err, cookie) => { // 判断cookie
+                  if (cookie && cookie.hasOwnProperty('user')) {
+                    console.log(response)
+                    this.setState({notice: '登陆成功！'})
+                    this.props.cb();
+                    setTimeout(() => {
+                        this.props.navigator.pop();
+                        this.setState({logining: false})
+                    }, 500)
+                  } else {
+                    this.setState({notice: '登陆失败！'})
+                    setTimeout(() => {
+                        this.setState({logining: false})
+                    }, 1500)
+                  }
+                  return response.text()
+                });
+            } else {
+                this.setState({notice: '登陆失败！'})
+                setTimeout(() => {
+                    this.setState({logining: false})
+                }, 1500)
             }
-            return response.text()
         })
         .then((responseJson) => {
             return responseJson;
@@ -103,6 +162,18 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    success_notice: {
+        color: '#00abe4',
+        fontSize: 36,
+        fontWeight: 'bold',
+        marginBottom: 40,
+    },
     item:{
       flexDirection:'row',
       alignItems:'center',
