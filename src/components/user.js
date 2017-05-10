@@ -61,7 +61,7 @@ export default class User extends Component {
                 </View>
                 <View style={Style.button_container}>
                     {this.state.logined ? (
-                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this.logout.bind(this)}>
+                        <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this._logout.bind(this)}>
                             <Text style={{fontSize:16,color:'#fff'}}>退出登陆</Text>
                         </TouchableHighlight>
                     ) : null}
@@ -76,7 +76,7 @@ export default class User extends Component {
     }
     renderInfo() {
     }
-    async logout() {
+    async _logout() {
         await AsyncStorage.removeItem(home_url)
         CookieManager.clearAll((err, res) => {
           console.log('cookies cleared!');
