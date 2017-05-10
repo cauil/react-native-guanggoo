@@ -10,6 +10,7 @@
     "cheerio-without-node-native": "^0.20.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
+    "react-native-code-push": "^2.0.3-beta",
     "react-native-cookies": "^3.0.0",
     "react-native-vector-icons": "^4.0.1"
   },
