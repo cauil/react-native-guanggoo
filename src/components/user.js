@@ -44,12 +44,12 @@ export default class User extends Component {
     render() {
         return (
           <View style={Style.container}>
-                <Image style={Style.logo} source={{uri: 'http://cdn.guanggoo.com/static/images/guanggoonew.png'}} />
+                <Image style={Style.logo} source={require('../assets/guanggoonew.png')} />
                 <View style={Style.info_container}>
-                    <Image style={Style.avatar}
-                    source={{
-                        uri: this.state.url
-                    }} />
+                    {this.state.logined ?
+                        <Image style={Style.avatar} source={{ uri: this.state.url }} /> :
+                        <Image style={Style.avatar} source={require('../assets/m_default.png')} />
+                    }
 
                     <View style={Style.topic}>
                         <Text style={Style.title}>

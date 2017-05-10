@@ -17,7 +17,7 @@ export default class Load extends Component {
     render() {
         return (
           <View style={Style.container}>
-              <Image style={Style.logo} source={{uri: 'http://cdn.guanggoo.com/static/images/guanggoonew.png'}} />
+              <Image style={Style.logo} source={require('../assets/guanggoonew.png')} />
               <Text style={Style.ad}>
                     Powered by React-Native
               </Text>
