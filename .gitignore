@@ -54,3 +54,4 @@ fastlane/screenshots
 
 # vim
 *.swp
+release_ios/*
