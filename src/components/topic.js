@@ -239,7 +239,7 @@ export default class Topic extends Component {
     }
     renderFooter() {
         if(this.state.loaded){
-            return <View style={{height: 0}} ><Text></Text></View>;
+            return <View style={{height: 50}} ><Text></Text></View>;
         }
 
         return <ActivityIndicator animating={true}  color="#356DD0" style={{height: 80, marginBottom: 200}} size="large" />
