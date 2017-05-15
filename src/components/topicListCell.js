@@ -34,7 +34,7 @@ export default class TopicListCell extends Component {
     renderCommentCount() {
         const data = this.props.data;
         if(data.count){
-            var comment_width = 24 + data.count.toString().length * 8;
+            var comment_width = 20 + data.count.toString().length * 7;
             return (
                     <View style={Style.replyNumWrapper}>
                         <View style={[Style.replyNum, {width: comment_width}]}>

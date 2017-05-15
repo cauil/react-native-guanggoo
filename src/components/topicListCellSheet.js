@@ -44,6 +44,7 @@ export const Style = StyleSheet.create({
 
     replyNumWrapper: {
         width: 30,
+        height: 18,
         marginLeft: 8,
         marginRight: 2,
         justifyContent: 'center',
@@ -51,17 +52,15 @@ export const Style = StyleSheet.create({
     },
     replyNum: {
         backgroundColor: '#98acdf',
-        // color: '#333333',
         flex: 1,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         height: 18,
-        //width: 46,
         justifyContent: 'center',
         borderRadius: 10,
         paddingTop: 2,
         paddingBottom: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingLeft: 5,
+        paddingRight: 5,
     },
     replyNumText: {
         color: '#ffffff',
