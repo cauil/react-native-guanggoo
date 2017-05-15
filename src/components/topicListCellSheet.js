@@ -45,7 +45,7 @@ export const Style = StyleSheet.create({
     replyNumWrapper: {
         width: 30,
         height: 18,
-        marginLeft: 8,
+        marginLeft: 5,
         marginRight: 2,
         justifyContent: 'center',
         alignSelf: 'center',
