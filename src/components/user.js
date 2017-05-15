@@ -97,7 +97,7 @@ export default class User extends Component {
     }
     _login() {
         this.props.navigator.push({
-            title: '',
+            title: '登陆',
             leftButtonIcon: this.state.backIcon,
             leftButtonTitle: '',
             onLeftButtonPress: this.props.navigator.pop,
