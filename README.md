@@ -11,6 +11,8 @@ React-Native IOS APP for www.guanggoo.com
 - [x] icon
 - [x] picture 
 - [x] login
+- [ ] toast
+- [ ] netinfo
 - [ ] reply
 - [ ] share
 
