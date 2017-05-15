@@ -11,6 +11,7 @@ import TopicList from './components/topicList';
 import Nodes from './components/nodes';
 import User from './components/user';
 import Icon, {TabBarItemIOS} from 'react-native-vector-icons/SimpleLineIcons';
+import {getUUID} from './utils/helper';
 
 export default class guanggoo extends Component {
     static title = '光谷社区';
@@ -95,14 +96,24 @@ export default class guanggoo extends Component {
                     this.setState({
                       selectedTab: 'all',
                     });
+                    const forceUpdate = getUUID();
+                    if(this.refs.navi) { // 更新登陆状态
+                        this.refs.navi.replace({
+                            passProps: {forceUpdate: forceUpdate},
+                            component: User,
+                            title: '用户信息',
+                            showTabBar: true,
+                        })
+                    }
                   }}>
                     <NavigatorIOS style={Style.container}
+                        ref="navi"
                         tintColor='#98acdf'
                         titleTextColor='#444'
                         initialRoute={{
                           title: '用户信息',
                           component: User,
-                          passProps: {},
+                          passProps: {forceUpdate: getUUID()},
                           showTabBar: true,
                         }}
                         itemWrapperStyle={Style.navigator} />

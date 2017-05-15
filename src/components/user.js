@@ -37,6 +37,12 @@ export default class User extends Component {
           });
         }
     }
+    // 更新登陆状态
+    componentWillReceiveProps(nextProps) {
+        if(this.props.forceUpdate !== nextProps.forceUpdate) {
+            this.getInfo();
+        }
+    }
     componentWillMount() {
         Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
         this.getInfo();
