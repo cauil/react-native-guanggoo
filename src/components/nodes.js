@@ -5,12 +5,15 @@ import {
     Text,
     ScrollView,
     TouchableHighlight,
-    PixelRatio
+    PixelRatio,
+    Dimensions,
 } from 'react-native';
 
 import {nodes_data, needLoginNodes} from '../utils/const';
 import TopicList from './topicList';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+const device_info = Dimensions.get('window')
 
 export default class Nodes extends Component {
     constructor(props) {
@@ -120,13 +123,12 @@ const Style = StyleSheet.create({
         borderRadius: 5,
         borderColor: '#98acdf',
         borderWidth: 1,
-        width: PixelRatio.get() === 3 ? 124 : PixelRatio.getPixelSizeForLayoutSize(55),
+        width: PixelRatio.get() === 3 ? 124 : (PixelRatio.getPixelSizeForLayoutSize((device_info.width-16)/6)-10),
     },
     node: {
         fontSize: 12,
         textAlign: 'left',
         color: '#666E74'
-        //color: '#98acdf',
     },
 
 });
