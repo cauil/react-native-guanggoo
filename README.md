@@ -11,8 +11,8 @@ React-Native IOS APP for www.guanggoo.com
 - [x] icon
 - [x] picture 
 - [x] login
-- [ ] toast
-- [ ] netinfo
+- [x] toast
+- [x] netinfo
 - [ ] reply
 - [ ] share
 
@@ -21,6 +21,11 @@ React-Native IOS APP for www.guanggoo.com
 coming
 
 ### Update
+
+**2017.5.16
+
+- add network detect
+- add toast
 
 **2017.5.5
 
