@@ -18,9 +18,6 @@ export default class Load extends Component {
         return (
           <View style={Style.container}>
               <Image style={Style.logo} source={require('../assets/guanggoonew.png')} />
-              <Text style={Style.ad}>
-                    Powered by React-Native
-              </Text>
           </View>
         );
     }
@@ -33,12 +30,6 @@ const Style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10
-    },
-    ad: {
-        color: '#00abe4',
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center'
     },
     logo: {
         height: 150,
