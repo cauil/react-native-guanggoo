@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {
+  NetInfo,
   StyleSheet,
   Text,
+  Alert,
   View,
   ListView,
   RefreshControl,
@@ -13,12 +15,13 @@ import TopicView from './topic';
 import Login from './login';
 import NeedLoginView from './needLoginView.js';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-const CookieManager = require('react-native-cookies');
 
 import {getHtml} from '../utils/api';
 import {parseListData} from '../utils/data';
 import {needLoginNodes} from '../utils/const';
+import {myToast} from '../utils/helper'
 
+const CookieManager = require('react-native-cookies');
 let List = [];
 const home_url = 'http://www.guanggoo.com';
 
@@ -40,6 +43,7 @@ export default class Lastest extends Component {
             refreshing: false, // 数据是否在refresh中
             loggedIn: false,
             loadedCookie: false,
+            network: 'wifi',
         };
     }
     componentWillMount() {
@@ -60,6 +64,20 @@ export default class Lastest extends Component {
             loadedCookie: true
           });
         });
+
+        NetInfo.fetch().done((network) => {
+            if(network === 'none') {
+                myToast('无网络链接!')
+            }
+            this.setState({network})
+            return network;
+        });
+        NetInfo.addEventListener( 'change', (network) => {
+            this.setState({network})
+            if(network !== 'none' && !(this.state.loaded && this.state.pageNum > 0)) {
+                this.getData(1);
+            }
+        });
     }
     componentDidMount() {
         this.getData(1);
@@ -74,7 +92,7 @@ export default class Lastest extends Component {
             // 可以加载
             if(this.state.loaded && this.state.pageNum > 0) { // 加载完毕
                 return this.renderList();
-            } else if(this.state.refreshing) { // 还在refreshing
+            } else if(this.state.refreshing || this.state.network === 'none') { // 还在refreshing 或者无网络情况下
                 return (
                     <View></View>
                 )
@@ -122,6 +140,10 @@ export default class Lastest extends Component {
         });
     }
     onRefresh() {
+        if(this.state.network === 'none') {
+            myToast('无网络链接!')
+            return
+        }
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.state.List),
             List: [],

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {
+    NetInfo,
     StyleSheet,
     View,
     Text,
+    Alert,
     ListView,
     Image,
     RefreshControl,
@@ -17,6 +19,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {getHtml} from '../utils/api';
 import {parseTopicData} from '../utils/data';
 import {needLoginNodes} from '../utils/const';
+import {myToast} from '../utils/helper'
 import {Style} from './topicSheet';
 
 const CookieManager = require('react-native-cookies');
@@ -45,6 +48,7 @@ export default class Topic extends Component {
             refreshing: false,
             loggedIn: false,
             loadedCookie: false,
+            network: 'wifi',
         };
     }
     componentWillMount() {
@@ -64,6 +68,20 @@ export default class Topic extends Component {
             loadedCookie: true
           });
         });
+
+        NetInfo.fetch().done((network) => {
+            if(network === 'none') {
+                myToast('无网络链接!')
+            }
+            this.setState({network})
+            return network;
+        });
+        NetInfo.addEventListener( 'change', (network) => {
+            this.setState({network})
+            if(network !== 'none' && !this.state.loaded) {
+                this.getData();
+            }
+        });
     }
     componentDidMount() {
         this.getData();
@@ -82,7 +100,7 @@ export default class Topic extends Component {
                     {this.renderLoaded()}
                 </View>
                 )
-            } else if (this.state.refreshing) {
+            } else if (this.state.refreshing || this.state.network === 'none') { // 还在refreshing 或者无网络情况下
                 return (
                     <View></View>
                 )
@@ -130,6 +148,10 @@ export default class Topic extends Component {
         });
     }
     onRefresh() {
+        if(this.state.network === 'none') {
+            myToast('无网络链接!')
+            return
+        }
         const comment = [];
         const content = [];
         this.setState({

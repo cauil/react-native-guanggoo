@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    NetInfo,
     StyleSheet,
     TextInput,
     View,
@@ -10,8 +11,7 @@ import {
     TouchableHighlight,
 } from 'react-native';
 
-import Toast from 'react-native-root-toast';
-import {getUUID, serializeJSON} from '../utils/helper'
+import {getUUID, serializeJSON, myToast} from '../utils/helper'
 import {getHtml} from '../utils/api';
 import {parseUserInfo} from '../utils/data';
 
@@ -26,7 +26,17 @@ export default class Login extends Component {
             email: '',
             password: '',
             _xsrf: getUUID(),
+            network: 'wifi',
         };
+    }
+    componentWillMount() {
+        NetInfo.fetch().done((network) => {
+            this.setState({network})
+            return network;
+        });
+        NetInfo.addEventListener( 'change', (network) => {
+            this.setState({network})
+        });
     }
     render() {
         return (
@@ -85,6 +95,10 @@ export default class Login extends Component {
             )
             return
         }
+        if(this.state.network === 'none') {
+            myToast('无网络链接!')
+            return
+        }
         fetch('http://www.guanggoo.com/login', {
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -106,6 +120,10 @@ export default class Login extends Component {
                         AsyncStorage.setItem(home_url, JSON.stringify(obj), () => {
                             this.props.cb();
                             // 登陆成功提示
+                            myToast('登陆成功!', () => {
+                                this.props.navigator.pop();
+                            })
+                            /*
                             let toast = Toast.show('登陆成功!', {
                                 duration: 500,
                                 position: 0,
@@ -127,53 +145,16 @@ export default class Login extends Component {
                                     // calls on toast\`s hide animation end.
                                 }
                             });
+                            */
                         });
                     })
                   } else {
-                    let toast = Toast.show('账号或者密码错误，登陆失败!', {
-                        duration: 1000,
-                        position: 0,
-                        shadow: true,
-                        animation: true,
-                        hideOnPress: true,
-                        delay: 0,
-                        onShow: () => {
-                            // calls on toast\`s appear animation start
-                        },
-                        onShown: () => {
-                            // calls on toast\`s appear animation end.
-                        },
-                        onHide: () => {
-                            // calls on toast\`s hide animation start.
-                        },
-                        onHidden: () => {
-                            // calls on toast\`s hide animation end.
-                        }
-                    });
+                      myToast('账号或者密码错误，登陆失败!')
                   }
                   return response.text()
                 });
             } else {
-                let toast = Toast.show('登陆失败!', {
-                    duration: 500,
-                    position: 0,
-                    shadow: true,
-                    animation: true,
-                    hideOnPress: true,
-                    delay: 0,
-                    onShow: () => {
-                        // calls on toast\`s appear animation start
-                    },
-                    onShown: () => {
-                        // calls on toast\`s appear animation end.
-                    },
-                    onHide: () => {
-                        // calls on toast\`s hide animation start.
-                    },
-                    onHidden: () => {
-                        // calls on toast\`s hide animation end.
-                    }
-                });
+                myToast('登陆失败!')
             }
         })
         .then((responseJson) => {
