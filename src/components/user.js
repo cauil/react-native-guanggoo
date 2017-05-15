@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    NetInfo,
     StyleSheet,
     View,
     Text,
@@ -12,6 +13,7 @@ import {
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Login from './login';
+import {myToast} from '../utils/helper'
 
 const CookieManager = require('react-native-cookies');
 const home_url = 'http://www.guanggoo.com'
@@ -24,6 +26,7 @@ export default class User extends Component {
             username: '未登陆',
             logined: false,
             url: default_img,
+            network: 'wifi',
         };
     }
     async getInfo() {
@@ -45,6 +48,18 @@ export default class User extends Component {
     }
     componentWillMount() {
         Icon.getImageSource('arrow-left', 20).then((source) => this.setState({ backIcon: source }));
+
+        NetInfo.fetch().done((network) => {
+            this.setState({network})
+            return network;
+        });
+        NetInfo.addEventListener( 'change', (network) => {
+            this.setState({network})
+            if(network !== 'none' && !this.state.logined) {
+                this.getInfo();
+            }
+        });
+
         this.getInfo();
     }
     render() {
@@ -96,6 +111,10 @@ export default class User extends Component {
         });
     }
     _login() {
+        if(this.state.network === 'none') {
+            myToast('无网络链接!')
+            return
+        }
         this.props.navigator.push({
             title: '登陆',
             leftButtonIcon: this.state.backIcon,
