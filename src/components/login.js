@@ -6,11 +6,11 @@ import {
     Text,
     Alert,
     Linking,
-    Modal,
     AsyncStorage,
     TouchableHighlight,
 } from 'react-native';
 
+import Toast from 'react-native-root-toast';
 import {getUUID, serializeJSON} from '../utils/helper'
 import {getHtml} from '../utils/api';
 import {parseUserInfo} from '../utils/data';
@@ -18,36 +18,6 @@ import {parseUserInfo} from '../utils/data';
 const CookieManager = require('react-native-cookies');
 const home_url = 'http://www.guanggoo.com'
 
-class MyModal extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            modalVisible: false // 控制modal
-        }
-    }
-    componentWillReceiveProps(props) {
-        this.setState({modalVisible: props.modalVisible})
-    }
-    render() {
-        return (
-          <View style={styles.container}>
-            <Modal
-              animationType={"fade"}
-              transparent={true}
-              visible={this.state.modalVisible}
-              onRequestClose={() => {alert("Modal has been closed.")}}
-              >
-                 <View style={styles.container}>
-                  <View>
-                    <Text style={styles.success_notice}>{this.props.notice}</Text>
-                  </View>
-                 </View>
-            </Modal>
-          </View>
-        )
-    }
-
-}
 
 export default class Login extends Component {
     constructor(props) {
@@ -56,7 +26,6 @@ export default class Login extends Component {
             email: '',
             password: '',
             _xsrf: getUUID(),
-            logining: false, //是否在登陆中
         };
     }
     render() {
@@ -93,7 +62,6 @@ export default class Login extends Component {
                 <Text style={{fontSize:16,color:'#fff'}}>重置密码</Text>
             </TouchableHighlight>
             </View>
-            <MyModal modalVisible={this.state.logining} notice={this.state.notice} />
         </View>
         );
     }
@@ -117,10 +85,6 @@ export default class Login extends Component {
             )
             return
         }
-        this.setState({
-            logining: true,
-            notice: '登陆中'
-        })
         fetch('http://www.guanggoo.com/login', {
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -140,28 +104,76 @@ export default class Login extends Component {
                     getHtml(data).then( (result) => {
                         const obj = parseUserInfo(result)
                         AsyncStorage.setItem(home_url, JSON.stringify(obj), () => {
-                            this.setState({notice: '登陆成功！'})
                             this.props.cb();
-
-                            setTimeout(() => {
-                                this.props.navigator.pop();
-                                this.setState({logining: false})
-                            }, 500)
+                            // 登陆成功提示
+                            let toast = Toast.show('登陆成功!', {
+                                duration: 500,
+                                position: 0,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                                delay: 0,
+                                onShow: () => {
+                                    // calls on toast\`s appear animation start
+                                },
+                                onShown: () => {
+                                    // calls on toast\`s appear animation end.
+                                },
+                                onHide: () => {
+                                    // calls on toast\`s hide animation start.
+                                },
+                                onHidden: () => {
+                                    this.props.navigator.pop();
+                                    // calls on toast\`s hide animation end.
+                                }
+                            });
                         });
                     })
                   } else {
-                    this.setState({notice: '登陆失败！'})
-                    setTimeout(() => {
-                        this.setState({logining: false})
-                    }, 1500)
+                    let toast = Toast.show('账号或者密码错误，登陆失败!', {
+                        duration: 1000,
+                        position: 0,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                        onShow: () => {
+                            // calls on toast\`s appear animation start
+                        },
+                        onShown: () => {
+                            // calls on toast\`s appear animation end.
+                        },
+                        onHide: () => {
+                            // calls on toast\`s hide animation start.
+                        },
+                        onHidden: () => {
+                            // calls on toast\`s hide animation end.
+                        }
+                    });
                   }
                   return response.text()
                 });
             } else {
-                this.setState({notice: '登陆失败！'})
-                setTimeout(() => {
-                    this.setState({logining: false})
-                }, 1500)
+                let toast = Toast.show('登陆失败!', {
+                    duration: 500,
+                    position: 0,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                    onShow: () => {
+                        // calls on toast\`s appear animation start
+                    },
+                    onShown: () => {
+                        // calls on toast\`s appear animation end.
+                    },
+                    onHide: () => {
+                        // calls on toast\`s hide animation start.
+                    },
+                    onHidden: () => {
+                        // calls on toast\`s hide animation end.
+                    }
+                });
             }
         })
         .then((responseJson) => {
