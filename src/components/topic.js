@@ -193,24 +193,28 @@ export default class Topic extends Component {
         );
     }
     renderTopicContentCell(v, i) {
+        return (
+            <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
+                {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
+                {v.img.map((im, j) => {
+                    return this.renderImg(im, j)
+                })}
+            </View>
+        )
+    }
+    renderImg(img, i) {
         let is_absolute_url = false;
-        if(v.img && v.img.indexOf('http') === -1) {
+        if(img && img.indexOf('http') === -1) {
             is_absolute_url = true;
-            v.img = 'http://www.guanggoo.com' + v.img;
+            img = 'http://www.guanggoo.com' + img;
         }
         if(is_absolute_url) {
             return (
-                <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
-                    {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
-                    {v.img ? <Image style={Style.content_emoji} source={{uri: v.img}} /> : null}
-                </View>
+                <Image key={i} style={Style.content_emoji} source={{uri: img}} />
             )
         } else {
             return (
-                <View key={i} style={[Style.contentWrapper, {marginTop: -5}]}>
-                    {v.text ? <Text style={Style.content}>{v.text}</Text> : null}
-                    {v.img ? <Image style={Style.content_img} source={{uri: v.img}} /> : null}
-                </View>
+                <Image style={Style.content_img} source={{uri: img}} />
             )
         }
     }

@@ -67,7 +67,12 @@ function parseTopicData(html) {
     for(let i = 0, len = content_obj.length; i < len; i++) {
         const obj = content_obj.eq(i);
         const text = obj.text();
-        const img = obj.find('img').attr('src');
+        const img = []
+        const imgs = obj.find('img')
+        for(let j = 0, l = imgs.length; j < l; j++) {
+            const img_obj = imgs.eq(j);
+            img.push(img_obj.attr('src'))
+        }
         content.push({text, img});
     }
 
