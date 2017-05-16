@@ -15,6 +15,7 @@ React-Native IOS APP for www.guanggoo.com
 - [x] netinfo
 - [ ] reply
 - [ ] share
+- [ ] favor
 
 #### Andrios
 
