@@ -38,7 +38,7 @@ export default class NeedLoginView extends Component {
                         }
                         this.props.onSelect()
                     }}>
-                    <Text style={{fontSize:16,color:'#fff'}}>点我登陆</Text>
+                    <Text style={{fontSize:16,color:'#fff'}}>点我登录</Text>
                 </TouchableHighlight>
                 </View>
             </View>

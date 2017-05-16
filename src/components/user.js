@@ -23,7 +23,7 @@ export default class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '未登陆',
+            username: '未登录',
             logined: false,
             url: default_img,
             network: 'wifi',
@@ -40,7 +40,7 @@ export default class User extends Component {
           });
         }
     }
-    // 更新登陆状态
+    // 更新登录状态
     componentWillReceiveProps(nextProps) {
         if(this.props.forceUpdate !== nextProps.forceUpdate) {
             this.getInfo();
@@ -83,12 +83,12 @@ export default class User extends Component {
                 <View style={Style.button_container}>
                     {this.state.logined ? (
                         <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this._logout.bind(this)}>
-                            <Text style={{fontSize:16,color:'#fff'}}>退出登陆</Text>
+                            <Text style={{fontSize:16,color:'#fff'}}>退出登录</Text>
                         </TouchableHighlight>
                     ) : null}
                     {!this.state.logined ? (
                         <TouchableHighlight style={Style.button} underlayColor='#737ab7' onPress={this._login.bind(this)}>
-                            <Text style={{fontSize:16,color:'#fff'}}>登陆</Text>
+                            <Text style={{fontSize:16,color:'#fff'}}>登录</Text>
                         </TouchableHighlight>
                     ) : null}
             </View>
@@ -105,7 +105,7 @@ export default class User extends Component {
           console.log(res);
           this.setState({
               logined: false,
-              username: '未登陆',
+              username: '未登录',
               url: default_img
           })
         });
@@ -116,7 +116,7 @@ export default class User extends Component {
             return
         }
         this.props.navigator.push({
-            title: '登陆',
+            title: '登录',
             leftButtonIcon: this.state.backIcon,
             leftButtonTitle: '',
             onLeftButtonPress: this.props.navigator.pop,
