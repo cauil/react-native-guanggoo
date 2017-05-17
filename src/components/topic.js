@@ -214,7 +214,7 @@ export default class Topic extends Component {
             )
         } else {
             return (
-                <Image style={Style.content_img} source={{uri: img}} />
+                <Image key={i} style={Style.content_img} source={{uri: img}} />
             )
         }
     }

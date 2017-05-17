@@ -2,6 +2,23 @@
 
 React-Native IOS APP for www.guanggoo.com
 
+### Preview
+
+![](http://7xj29n.com1.z0.glb.clouddn.com/guanggoo3.gif)
+
+### Install
+
+1. `npm i`
+
+2.
+```
+react-native link react-native-code-push
+react-native link react-native-cookies
+react-native link react-native-vector-icons
+```
+
+3. react-native run-ios
+
 ### TODO
 
 #### IOS
@@ -17,9 +34,9 @@ React-Native IOS APP for www.guanggoo.com
 - [ ] share
 - [ ] favor
 
-#### Andrios
+#### Andriod
 
-coming
+coming soon
 
 ### Update
 
