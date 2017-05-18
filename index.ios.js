@@ -21,6 +21,7 @@ export default class Home  extends Component {
         loaded: false,
     }
 
+    /*
     codePushStatusDidChange(status) {
         switch(status) {
             case codePush.SyncStatus.CHECKING_FOR_UPDATE:
@@ -43,6 +44,7 @@ export default class Home  extends Component {
     codePushDownloadDidProgress(progress) {
         console.log(progress.receivedBytes + " of " + progress.totalBytes + " received.");
     }
+    */
 
     componentDidMount() {
         setTimeout(() => {
