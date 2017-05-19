@@ -216,7 +216,7 @@ export default class Topic extends Component {
             )
         } else {
             return (
-                <TouchableHighlight key={i} style={Style.img_container} onPress={() => { Linking.openURL(img) }}>
+                <TouchableHighlight key={i} underlayColor='#cccccc' style={Style.img_container} onPress={() => { Linking.openURL(img) }}>
                     <Image style={Style.content_img} source={{uri: img}} />
                 </TouchableHighlight>
             )

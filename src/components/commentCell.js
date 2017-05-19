@@ -68,7 +68,7 @@ export default class commentCell extends Component {
             <View key={i}>
                 {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
                 {innerv.img ? 
-                    (<TouchableHighlight style={Style.img_container} onPress={() => { Linking.openURL(innerv.img) }}>
+                    (<TouchableHighlight underlayColor='#cccccc' style={Style.img_container} onPress={() => { Linking.openURL(innerv.img) }}>
                         <Image style={Style.content_img} source={{uri: innerv.img}} />
                     </TouchableHighlight>)
                 : null}
