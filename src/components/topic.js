@@ -7,8 +7,10 @@ import {
     Alert,
     ListView,
     Image,
+    Linking,
     RefreshControl,
-    ActivityIndicator
+    ActivityIndicator,
+    TouchableHighlight,
 } from 'react-native';
 
 import NeedLoginView from './needLoginView.js';
@@ -214,7 +216,9 @@ export default class Topic extends Component {
             )
         } else {
             return (
-                <Image key={i} style={Style.content_img} source={{uri: img}} />
+                <TouchableHighlight key={i} style={Style.img_container} onPress={() => { Linking.openURL(img) }}>
+                    <Image style={Style.content_img} source={{uri: img}} />
+                </TouchableHighlight>
             )
         }
     }
@@ -301,6 +305,10 @@ const Style = StyleSheet.create({
 		marginLeft: 5,
 		borderRadius: 4
 	},
+    img_container: {
+        width: 200,
+        height: 200,
+    },
 	content_img: {
         width: 200,
         height: 200,

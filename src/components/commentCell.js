@@ -4,6 +4,8 @@ import {
     Text,
     Image,
     StyleSheet,
+    Linking,
+    TouchableHighlight,
 } from 'react-native';
 
 export default class commentCell extends Component {
@@ -65,7 +67,11 @@ export default class commentCell extends Component {
             return (
             <View key={i}>
                 {innerv.text ? <Text style={[Style.content, Style.comment_con]}>{innerv.text}</Text> : null}
-                {innerv.img ? <Image style={Style.content_img} source={{uri: innerv.img}} /> : null}
+                {innerv.img ? 
+                    (<TouchableHighlight style={Style.img_container} onPress={() => { Linking.openURL(innerv.img) }}>
+                        <Image style={Style.content_img} source={{uri: innerv.img}} />
+                    </TouchableHighlight>)
+                : null}
             </View>
             )
         }
@@ -90,6 +96,10 @@ const Style = StyleSheet.create({
         flex: 1,
         marginBottom: 5,
         marginLeft: 7,
+    },
+    img_container: {
+        width: 200,
+        height: 200,
     },
 	content_img: {
         width: 200,
