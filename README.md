@@ -3,9 +3,11 @@
 React-Native IOS APP for www.guanggoo.com
 
 ### Preview
-
-![](http://7xj29n.com1.z0.glb.clouddn.com/guanggoo3.gif)
-
+<img src="http://7xj29n.com1.z0.glb.clouddn.com/1.png" width="130" style="margin-right:10px;">
+<img src="http://7xj29n.com1.z0.glb.clouddn.com/2.png" width="130" style="margin-right:10px;">
+<img src="http://7xj29n.com1.z0.glb.clouddn.com/3.png" width="130" style="margin-right:10px;">
+<img src="http://7xj29n.com1.z0.glb.clouddn.com/4.png" width="130" style="margin-right:10px;">
+<img src="http://7xj29n.com1.z0.glb.clouddn.com/5.png" width="130" style="margin-right:10px;">
 ### Install
 
 1. `npm i`
