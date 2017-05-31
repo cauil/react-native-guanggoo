@@ -3,7 +3,7 @@
 React-Native IOS APP for www.guanggoo.com
 
 ### Preview
-![](http://7xj29n.com1.z0.glb.clouddn.com/1.png) ![](http://7xj29n.com1.z0.glb.clouddn.com/2.png) ![](http://7xj29n.com1.z0.glb.clouddn.com/3.png) ![](http://7xj29n.com1.z0.glb.clouddn.com/4.png) ![](http://7xj29n.com1.z0.glb.clouddn.com/5.png)
+![](./screenshots/1.jpg) ![](./screenshots/2.jpg) ![](./screenshots/3.jpg) ![](./screenshots/4.jpg) ![](./screenshots/5.jpg)
 
 ### Install
 
